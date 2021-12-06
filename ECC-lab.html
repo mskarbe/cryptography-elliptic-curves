@@ -14236,84 +14236,10 @@ Below are presented the specifications of the processor.</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1322]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># source: https://www.fosslinux.com/43882/extracting-linux-system-and-hardware-info-using-python.htm </span>
-
-<span class="kn">import</span> <span class="nn">platform</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">import</span> <span class="nn">psutil</span>
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Architecture :&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">architecture</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Machine :&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">machine</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Operating System Release :&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] System Name :&quot;</span><span class="p">,</span><span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Operating System Version :&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">version</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Platform :&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">platform</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Processor :&quot;</span><span class="p">,</span><span class="n">platform</span><span class="o">.</span><span class="n">processor</span><span class="p">())</span>
-
-<span class="c1"># getting thesystem up time from the uptime file at proc directory</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/proc/uptime&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">uptime</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-
-<span class="n">uptime</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">uptime</span><span class="p">))</span>
-<span class="n">uptime_hours</span> <span class="o">=</span> <span class="n">uptime</span> <span class="o">//</span> <span class="mi">3600</span>
-<span class="n">uptime_minutes</span> <span class="o">=</span> <span class="p">(</span><span class="n">uptime</span> <span class="o">%</span> <span class="mi">3600</span><span class="p">)</span> <span class="o">//</span> <span class="mi">60</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] System Uptime : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uptime_hours</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uptime_minutes</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; hours&quot;</span><span class="p">)</span>
-
-<span class="c1"># number of processes</span>
-<span class="n">pids</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">subdir</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;/proc&#39;</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">subdir</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
-        <span class="n">pids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subdir</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Total number of processes : </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pids</span><span class="p">)))</span>
-
-<span class="c1"># This code will print the number of CPU cores present</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Number of Physical cores :&quot;</span><span class="p">,</span> <span class="n">psutil</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">(</span><span class="n">logical</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Number of Total cores :&quot;</span><span class="p">,</span> <span class="n">psutil</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">(</span><span class="n">logical</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="c1"># This will print the maximum, minimum and current CPU frequency</span>
-<span class="n">cpu_frequency</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">cpu_freq</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Max Frequency : </span><span class="si">{</span><span class="n">cpu_frequency</span><span class="o">.</span><span class="n">max</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">Mhz&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Min Frequency : </span><span class="si">{</span><span class="n">cpu_frequency</span><span class="o">.</span><span class="n">min</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">Mhz&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Current Frequency : </span><span class="si">{</span><span class="n">cpu_frequency</span><span class="o">.</span><span class="n">current</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">Mhz&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="c1"># This will print the usage of CPU per core</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Total CPU Usage : </span><span class="si">{</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_percent</span><span class="p">()</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-
-<span class="c1"># reading the cpuinfo file to print the name of</span>
-<span class="c1"># the CPU present</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/proc/cpuinfo&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">file_info</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-
-<span class="n">cpuinfo</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">file_info</span> <span class="k">if</span> <span class="s2">&quot;model name&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cpuinfo</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Processor &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; : &quot;</span> <span class="o">+</span> <span class="n">item</span><span class="p">)</span>
-
-<span class="c1"># writing a function to convert bytes to GigaByte</span>
-<span class="k">def</span> <span class="nf">bytes_to_GB</span><span class="p">(</span><span class="nb">bytes</span><span class="p">):</span>
-    <span class="n">gb</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">/</span><span class="p">(</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>
-    <span class="n">gb</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">gb</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">gb</span>
-
-<span class="c1"># Using the virtual_memory() function it will return a tuple</span>
-<span class="n">virtual_memory</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">virtual_memory</span><span class="p">()</span>
-
-<span class="c1">#This will print the primary memory details</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Total Memory present :&quot;</span><span class="p">,</span> <span class="n">bytes_to_GB</span><span class="p">(</span><span class="n">virtual_memory</span><span class="o">.</span><span class="n">total</span><span class="p">),</span> <span class="s2">&quot;Gb&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Total Memory Available :&quot;</span><span class="p">,</span> <span class="n">bytes_to_GB</span><span class="p">(</span><span class="n">virtual_memory</span><span class="o">.</span><span class="n">available</span><span class="p">),</span> <span class="s2">&quot;Gb&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Total Memory Used :&quot;</span><span class="p">,</span> <span class="n">bytes_to_GB</span><span class="p">(</span><span class="n">virtual_memory</span><span class="o">.</span><span class="n">used</span><span class="p">),</span> <span class="s2">&quot;Gb&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Percentage Used :&quot;</span><span class="p">,</span> <span class="n">virtual_memory</span><span class="o">.</span><span class="n">percent</span><span class="p">,</span> <span class="s2">&quot;%&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># This will print the swap memory details if available</span>
-<span class="n">swap</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">swap_memory</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Total swap memory : </span><span class="si">{</span><span class="n">bytes_to_GB</span><span class="p">(</span><span class="n">swap</span><span class="o">.</span><span class="n">total</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Free swap memory : </span><span class="si">{</span><span class="n">bytes_to_GB</span><span class="p">(</span><span class="n">swap</span><span class="o">.</span><span class="n">free</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Used swap memory : </span><span class="si">{</span><span class="n">bytes_to_GB</span><span class="p">(</span><span class="n">swap</span><span class="o">.</span><span class="n">used</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Percentage Used : </span><span class="si">{</span><span class="n">swap</span><span class="o">.</span><span class="n">percent</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">run</span> systemInfo.py
 </pre></div>
 
      </div>
@@ -14334,24 +14260,18 @@ Below are presented the specifications of the processor.</p>
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>[+] Architecture : 64bit
-[+] Machine : x86_64
-[+] Operating System Release : 5.4.0-90-generic
 [+] System Name : Linux
 [+] Operating System Version : #101~18.04.1-Ubuntu SMP Fri Oct 22 09:25:04 UTC 2021
 [+] Platform : Linux-5.4.0-90-generic-x86_64-with-glibc2.27
 [+] Processor : x86_64
-[+] System Uptime : 83:32 hours
-[+] Total number of processes : 594
+[+] System Uptime : 117:3 hours
+[+] Total number of processes : 887
 [+] Number of Physical cores : 4
 [+] Number of Total cores : 8
-
-
 [+] Max Frequency : 4900.00Mhz
 [+] Min Frequency : 400.00Mhz
-[+] Current Frequency : 1869.68Mhz
-
-
-[+] Total CPU Usage : 28.9%
+[+] Current Frequency : 2600.76Mhz
+[+] Total CPU Usage : 9.9%
 [+] Processor 0 :  Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 [+] Processor 1 :  Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 [+] Processor 2 :  Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
@@ -14361,15 +14281,13 @@ Below are presented the specifications of the processor.</p>
 [+] Processor 6 :  Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 [+] Processor 7 :  Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 [+] Total Memory present : 15.34 Gb
-[+] Total Memory Available : 3.34 Gb
-[+] Total Memory Used : 10.7 Gb
-[+] Percentage Used : 78.2 %
-
-
+[+] Total Memory Available : 2.6 Gb
+[+] Total Memory Used : 11.44 Gb
+[+] Percentage Used : 83.1 %
 [+] Total swap memory : 32.0
-[+] Free swap memory : 22.87
-[+] Used swap memory : 9.13
-[+] Percentage Used : 28.5%
+[+] Free swap memory : 16.72
+[+] Used swap memory : 15.28
+[+] Percentage Used : 47.8%
 </pre>
 </div>
 </div>
@@ -14430,7 +14348,7 @@ Below are presented the specifications of the processor.</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1323]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">reset</span>
@@ -14444,7 +14362,7 @@ Below are presented the specifications of the processor.</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1324]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span> 
@@ -14493,7 +14411,7 @@ Below are presented the specifications of the processor.</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1325]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
@@ -14547,7 +14465,7 @@ Below are presented the specifications of the processor.</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1326]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">getCurve</span><span class="p">(</span><span class="n">ELLIPTIC_CURVES</span><span class="o">.</span><span class="n">bp256</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
@@ -14586,7 +14504,7 @@ EllipticCurve(a=5669818760532611004362722839617834607712061453947521410938682818
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1327]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -14653,7 +14571,7 @@ GcdProps(gcd=3, x=34, y=-61)
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1328]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># check if point is on curve [in the field Fp]</span>
@@ -14681,7 +14599,7 @@ GcdProps(gcd=3, x=34, y=-61)
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1329]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ec1</span> <span class="o">=</span> <span class="n">getCurve</span><span class="p">(</span><span class="n">ELLIPTIC_CURVES</span><span class="o">.</span><span class="n">bp256</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
@@ -14722,7 +14640,7 @@ True
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1330]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># slope of the line crossing p1, p2 and inverse of result </span>
@@ -14795,7 +14713,7 @@ Point(x=525759695601913515345420914663801060410285817186408752374410730116160256
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1331]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
@@ -14823,7 +14741,7 @@ Point(x=525759695601913515345420914663801060410285817186408752374410730116160256
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1332]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># normal multiplication n*P</span>
@@ -14849,7 +14767,7 @@ Point(x=525759695601913515345420914663801060410285817186408752374410730116160256
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1333]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">toBinary</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="nb">bin</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
@@ -14878,7 +14796,7 @@ Point(x=525759695601913515345420914663801060410285817186408752374410730116160256
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1334]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[39]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">multSlow</span> <span class="o">=</span> <span class="n">pointMultiplySlow</span><span class="p">(</span><span class="n">ec1</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
@@ -14914,9 +14832,9 @@ Point(x=525759695601913515345420914663801060410285817186408752374410730116160256
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Slow multiplication:  23.32359518699991 s
-Fast multiplication (double-add):  0.009026952999874993 s
-Difference (slow - fast):  23.314568234000035 s
+<pre>Slow multiplication:  10.337105427000001 s
+Fast multiplication (double-add):  0.002713084999999893 s
+Difference (slow - fast):  10.334392342000001 s
 </pre>
 </div>
 </div>
@@ -14928,7 +14846,7 @@ Difference (slow - fast):  23.314568234000035 s
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1335]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[40]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Montgomery ladder double and add algorithm </span>
@@ -14982,7 +14900,7 @@ Difference (slow - fast):  23.314568234000035 s
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1336]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[41]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># short hand notation for base point of the curve</span>
@@ -15015,7 +14933,7 @@ Difference (slow - fast):  23.314568234000035 s
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1337]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[42]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -15040,7 +14958,7 @@ Difference (slow - fast):  23.314568234000035 s
         <span class="bp">self</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> 
         <span class="bp">self</span><span class="o">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;- </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;-&quot;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">80</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))]))</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\t</span><span class="s1">standard deviation: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">standardDeviation</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\t</span><span class="s1">mean: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\t</span><span class="s1">variance: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">variance</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\t</span><span class="s1">arithmetic mean: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\t</span><span class="s1">median: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">median</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\t</span><span class="s1">maximum: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\t</span><span class="s1">minimum: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">min</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;- </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;-&quot;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">80</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))]))</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\t</span><span class="s1">standard deviation: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">standardDeviation</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\t</span><span class="s1">variance: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">variance</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\t</span><span class="s1">arithmetic mean: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\t</span><span class="s1">median: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">median</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\t</span><span class="s1">maximum: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max</span><span class="si">}</span><span class="s1"> </span><span class="se">\n\t</span><span class="s1">minimum: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">min</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
 </pre></div>
 
      </div>
@@ -15051,7 +14969,7 @@ Difference (slow - fast):  23.314568234000035 s
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1338]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[43]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">measureDoubleAndAdd</span><span class="p">(</span><span class="n">ec</span><span class="p">:</span> <span class="n">EllipticCurve</span><span class="p">,</span> <span class="n">scalars</span><span class="p">:</span> <span class="n">List</span><span class="p">):</span>
@@ -15151,309 +15069,297 @@ Difference (slow - fast):  23.314568234000035 s
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>================================= Curve:  brainpoolP256r1 , samples bit size:  14 =================================
 - Montgomery Ladder Timing -------------------------------------------------------- 
-	standard deviation: 0.0011580543021765945 
-	mean: 0.008014376400008889 
-	variance: 1.3410897667897192e-06 
-	arithmetic mean: 0.008014376400008889 
-	median: 0.007781743500004268 
-	maximum: 0.01087174999997842 
-	minimum: 0.006506674000092971 
+	standard deviation: 0.0007548801765034043 
+	variance: 5.698440808778109e-07 
+	arithmetic mean: 0.003748938999999633 
+	median: 0.0035187564999983323 
+	maximum: 0.005868776999999881 
+	minimum: 0.002840479999999701 
 
 - Standard Double-and-add Timing -------------------------------------------------- 
-	standard deviation: 0.0009152476847646507 
-	mean: 0.00589683216666496 
-	variance: 8.376783244670534e-07 
-	arithmetic mean: 0.00589683216666496 
-	median: 0.005693186999906175 
-	maximum: 0.008315060999848356 
-	minimum: 0.004562335000173334 
+	standard deviation: 0.0006238278146219745 
+	variance: 3.891611422960285e-07 
+	arithmetic mean: 0.002809679933333579 
+	median: 0.002632143500001405 
+	maximum: 0.004576283000002235 
+	minimum: 0.002155230999999702 
 
     Multiplicant Multiplicant (bin)  Montgomery Ladder time  Standard DAA time  Results equal
-0          11731     10110111010011                0.007578           0.005979           True
-1          11743     10110111011111                0.007197           0.006857           True
-2          11777     10111000000001                0.008527           0.004595           True
-3          11779     10111000000011                0.008472           0.005065           True
-4          11783     10111000000111                0.007048           0.005808           True
-5          11789     10111000001101                0.007397           0.005347           True
-6          11801     10111000011001                0.008007           0.005015           True
-7          11807     10111000011111                0.008748           0.006208           True
-8          11813     10111000100101                0.009669           0.005424           True
-9          11821     10111000101101                0.007263           0.005306           True
-10         11827     10111000110011                0.007375           0.005578           True
-11         11831     10111000110111                0.010361           0.005474           True
-12         11833     10111000111001                0.007806           0.005213           True
-13         11839     10111000111111                0.008446           0.008315           True
-14         11863     10111001010111                0.006820           0.005425           True
-15         11867     10111001011011                0.007966           0.005489           True
-16         11887     10111001101111                0.009474           0.005883           True
-17         11897     10111001111001                0.007925           0.006073           True
-18         11903     10111001111111                0.006844           0.007955           True
-19         11909     10111010000101                0.007298           0.005271           True
-20         11923     10111010010011                0.006731           0.006079           True
-21         11927     10111010010111                0.007057           0.006213           True
-22         11933     10111010011101                0.006981           0.006451           True
-23         11939     10111010100011                0.006987           0.005966           True
-24         11941     10111010100101                0.007860           0.004562           True
-25         11953     10111010110001                0.007758           0.005108           True
-26         11959     10111010110111                0.006507           0.005355           True
-27         11969     10111011000001                0.010872           0.006266           True
-28         11971     10111011000011                0.010456           0.008064           True
-29         11981     10111011001101                0.009001           0.006559           True
+0          11731     10110111010011                0.005510           0.003236           True
+1          11743     10110111011111                0.003736           0.004576           True
+2          11777     10111000000001                0.005191           0.002507           True
+3          11779     10111000000011                0.004537           0.004115           True
+4          11783     10111000000111                0.005869           0.002830           True
+5          11789     10111000001101                0.003849           0.002836           True
+6          11801     10111000011001                0.004210           0.003267           True
+7          11807     10111000011111                0.004044           0.003865           True
+8          11813     10111000100101                0.003890           0.002894           True
+9          11821     10111000101101                0.004116           0.002732           True
+10         11827     10111000110011                0.003528           0.002535           True
+11         11831     10111000110111                0.004002           0.002634           True
+12         11833     10111000111001                0.003510           0.002499           True
+13         11839     10111000111111                0.003418           0.002658           True
+14         11863     10111001010111                0.003612           0.003077           True
+15         11867     10111001011011                0.003252           0.002631           True
+16         11887     10111001101111                0.003314           0.002747           True
+17         11897     10111001111001                0.003241           0.002566           True
+18         11903     10111001111111                0.003143           0.002745           True
+19         11909     10111010000101                0.003020           0.002155           True
+20         11923     10111010010011                0.003112           0.002162           True
+21         11927     10111010010111                0.003205           0.002526           True
+22         11933     10111010011101                0.003455           0.002444           True
+23         11939     10111010100011                0.003107           0.002419           True
+24         11941     10111010100101                0.003023           0.002196           True
+25         11953     10111010110001                0.004686           0.002353           True
+26         11959     10111010110111                0.003944           0.004276           True
+27         11969     10111011000001                0.003129           0.002178           True
+28         11971     10111011000011                0.002977           0.002268           True
+29         11981     10111011001101                0.002840           0.002363           True
 
 ================================= Curve:  brainpoolP512r1 , samples bit size:  14 =================================
 - Montgomery Ladder Timing -------------------------------------------------------- 
-	standard deviation: 0.002978251245830974 
-	mean: 0.014422710066681551 
-	variance: 8.869980483293749e-06 
-	arithmetic mean: 0.014422710066681551 
-	median: 0.013682016499956262 
-	maximum: 0.024997846999895046 
-	minimum: 0.01113524399988819 
+	standard deviation: 0.0009272605970364594 
+	variance: 8.598122148164111e-07 
+	arithmetic mean: 0.007645231066666962 
+	median: 0.007335874000000686 
+	maximum: 0.011666913999999196 
+	minimum: 0.006802823000001013 
 
 - Standard Double-and-add Timing -------------------------------------------------- 
-	standard deviation: 0.0026625580745892148 
-	mean: 0.01120169783334859 
-	variance: 7.089215500560227e-06 
-	arithmetic mean: 0.01120169783334859 
-	median: 0.010640206999937618 
-	maximum: 0.020869733999916207 
-	minimum: 0.007511069000202042 
+	standard deviation: 0.0009194335487465626 
+	variance: 8.453580505606978e-07 
+	arithmetic mean: 0.005657672799999721 
+	median: 0.005420478499999604 
+	maximum: 0.009281878999999549 
+	minimum: 0.004442162000000138 
 
     Multiplicant Multiplicant (bin)  Montgomery Ladder time  Standard DAA time  Results equal
-0          11731     10110111010011                0.019676           0.020870           True
-1          11743     10110111011111                0.018690           0.016923           True
-2          11777     10111000000001                0.018436           0.011869           True
-3          11779     10111000000011                0.015737           0.010992           True
-4          11783     10111000000111                0.011924           0.009596           True
-5          11789     10111000001101                0.012028           0.008462           True
-6          11801     10111000011001                0.011135           0.007511           True
-7          11807     10111000011111                0.011341           0.009637           True
-8          11813     10111000100101                0.011682           0.008065           True
-9          11821     10111000101101                0.012949           0.009419           True
-10         11827     10111000110011                0.013919           0.011785           True
-11         11831     10111000110111                0.016015           0.011295           True
-12         11833     10111000111001                0.013408           0.012598           True
-13         11839     10111000111111                0.024998           0.012427           True
-14         11863     10111001010111                0.014661           0.013774           True
-15         11867     10111001011011                0.018791           0.014542           True
-16         11887     10111001101111                0.013751           0.013071           True
-17         11897     10111001111001                0.012630           0.010705           True
-18         11903     10111001111111                0.013257           0.011263           True
-19         11909     10111010000101                0.012177           0.008598           True
-20         11923     10111010010011                0.011560           0.008661           True
-21         11927     10111010010111                0.012422           0.009570           True
-22         11933     10111010011101                0.013571           0.010855           True
-23         11939     10111010100011                0.014007           0.010546           True
-24         11941     10111010100101                0.013946           0.010032           True
-25         11953     10111010110001                0.013712           0.010575           True
-26         11959     10111010110111                0.014322           0.011730           True
-27         11969     10111011000001                0.013652           0.010486           True
-28         11971     10111011000011                0.013417           0.009939           True
-29         11981     10111011001101                0.014866           0.010256           True
+0          11731     10110111010011                0.007238           0.004589           True
+1          11743     10110111011111                0.006803           0.006498           True
+2          11777     10111000000001                0.007719           0.004442           True
+3          11779     10111000000011                0.007051           0.005054           True
+4          11783     10111000000111                0.007282           0.004988           True
+5          11789     10111000001101                0.006993           0.005023           True
+6          11801     10111000011001                0.007601           0.005481           True
+7          11807     10111000011111                0.007347           0.007347           True
+8          11813     10111000100101                0.007325           0.005383           True
+9          11821     10111000101101                0.007541           0.005290           True
+10         11827     10111000110011                0.008004           0.005253           True
+11         11831     10111000110111                0.007893           0.005883           True
+12         11833     10111000111001                0.007055           0.005267           True
+13         11839     10111000111111                0.007149           0.006598           True
+14         11863     10111001010111                0.007215           0.005438           True
+15         11867     10111001011011                0.006914           0.005498           True
+16         11887     10111001101111                0.006921           0.006042           True
+17         11897     10111001111001                0.006952           0.005493           True
+18         11903     10111001111111                0.007045           0.005826           True
+19         11909     10111010000101                0.007721           0.004663           True
+20         11923     10111010010011                0.009530           0.005112           True
+21         11927     10111010010111                0.011667           0.009282           True
+22         11933     10111010011101                0.008144           0.006768           True
+23         11939     10111010100011                0.007165           0.005349           True
+24         11941     10111010100101                0.007796           0.005382           True
+25         11953     10111010110001                0.007958           0.005584           True
+26         11959     10111010110111                0.008083           0.005842           True
+27         11969     10111011000001                0.008125           0.005161           True
+28         11971     10111011000011                0.007841           0.005403           True
+29         11981     10111011001101                0.007278           0.005791           True
 
 ================================= Curve:  brainpoolP256r1 , samples bit size:  19 =================================
 - Montgomery Ladder Timing -------------------------------------------------------- 
-	standard deviation: 0.0017333481958970974 
-	mean: 0.00901058780002586 
-	variance: 3.0044959682197224e-06 
-	arithmetic mean: 0.00901058780002586 
-	median: 0.008688034500096364 
-	maximum: 0.012666213000102289 
-	minimum: 0.006768218000161141 
+	standard deviation: 0.0003489965324317902 
+	variance: 1.217985796494136e-07 
+	arithmetic mean: 0.004200676166666758 
+	median: 0.0041807985000001935 
+	maximum: 0.005343134000000305 
+	minimum: 0.0036799760000008064 
 
 - Standard Double-and-add Timing -------------------------------------------------- 
-	standard deviation: 0.0011424054694391863 
-	mean: 0.0063799538333190265 
-	variance: 1.3050902566045675e-06 
-	arithmetic mean: 0.0063799538333190265 
-	median: 0.006082708500116496 
-	maximum: 0.009034337999992204 
-	minimum: 0.004802383999958693 
+	standard deviation: 0.00036537150532008327 
+	variance: 1.3349633689986363e-07 
+	arithmetic mean: 0.0031157314666665787 
+	median: 0.0030507130000003713 
+	maximum: 0.003907426999997909 
+	minimum: 0.002371668000002103 
 
     Multiplicant   Multiplicant (bin)  Montgomery Ladder time  Standard DAA time  Results equal
-0         284059  1000101010110011011                0.010552           0.007449           True
-1         284083  1000101010110110011                0.011416           0.007417           True
-2         284093  1000101010110111101                0.011347           0.007819           True
-3         284111  1000101010111001111                0.012049           0.009034           True
-4         284117  1000101010111010101                0.012666           0.008499           True
-5         284129  1000101010111100001                0.011318           0.007202           True
-6         284131  1000101010111100011                0.012588           0.007889           True
-7         284149  1000101010111110101                0.009331           0.007859           True
-8         284153  1000101010111111001                0.008790           0.007520           True
-9         284159  1000101010111111111                0.008301           0.007143           True
-10        284161  1000101011000000001                0.008676           0.005060           True
-11        284173  1000101011000001101                0.008931           0.005317           True
-12        284191  1000101011000011111                0.008700           0.006030           True
-13        284201  1000101011000101001                0.007741           0.005365           True
-14        284227  1000101011001000011                0.007914           0.005359           True
-15        284231  1000101011001000111                0.007153           0.005918           True
-16        284233  1000101011001001001                0.008042           0.005116           True
-17        284237  1000101011001001101                0.010163           0.005868           True
-18        284243  1000101011001010011                0.009384           0.006354           True
-19        284261  1000101011001100101                0.008305           0.006316           True
-20        284267  1000101011001101011                0.007560           0.006136           True
-21        284269  1000101011001101101                0.006857           0.005611           True
-22        284293  1000101011010000101                0.007432           0.005127           True
-23        284311  1000101011010010111                0.007256           0.005166           True
-24        284341  1000101011010110101                0.006915           0.005334           True
-25        284357  1000101011011000101                0.006768           0.005171           True
-26        284369  1000101011011010001                0.007204           0.004802           True
-27        284377  1000101011011011001                0.009448           0.006018           True
-28        284387  1000101011011100011                0.009228           0.006658           True
-29        284407  1000101011011110111                0.008283           0.006841           True
+0         284059  1000101010110011011                0.004733           0.003492           True
+1         284083  1000101010110110011                0.004607           0.003907           True
+2         284093  1000101010110111101                0.004386           0.003418           True
+3         284111  1000101010111001111                0.004218           0.003283           True
+4         284117  1000101010111010101                0.004492           0.003532           True
+5         284129  1000101010111100001                0.004413           0.003131           True
+6         284131  1000101010111100011                0.004634           0.003715           True
+7         284149  1000101010111110101                0.004289           0.003329           True
+8         284153  1000101010111111001                0.004166           0.003394           True
+9         284159  1000101010111111111                0.004069           0.003380           True
+10        284161  1000101011000000001                0.003972           0.002372           True
+11        284173  1000101011000001101                0.003881           0.002802           True
+12        284191  1000101011000011111                0.004438           0.002956           True
+13        284201  1000101011000101001                0.004409           0.002820           True
+14        284227  1000101011001000011                0.004195           0.002876           True
+15        284231  1000101011001000111                0.004112           0.003038           True
+16        284233  1000101011001001001                0.003951           0.002785           True
+17        284237  1000101011001001101                0.003778           0.002559           True
+18        284243  1000101011001010011                0.003680           0.002756           True
+19        284261  1000101011001100101                0.003922           0.003007           True
+20        284267  1000101011001101011                0.004020           0.003112           True
+21        284269  1000101011001101101                0.003714           0.002841           True
+22        284293  1000101011010000101                0.004303           0.002877           True
+23        284311  1000101011010010111                0.004224           0.003760           True
+24        284341  1000101011010110101                0.005343           0.003064           True
+25        284357  1000101011011000101                0.004066           0.002931           True
+26        284369  1000101011011010001                0.003997           0.002855           True
+27        284377  1000101011011011001                0.003706           0.003168           True
+28        284387  1000101011011100011                0.003951           0.002741           True
+29        284407  1000101011011110111                0.004351           0.003572           True
 
 ================================= Curve:  brainpoolP512r1 , samples bit size:  19 =================================
 - Montgomery Ladder Timing -------------------------------------------------------- 
-	standard deviation: 0.00499884630891078 
-	mean: 0.019513714066692955 
-	variance: 2.498846442011093e-05 
-	arithmetic mean: 0.019513714066692955 
-	median: 0.016936518499960584 
-	maximum: 0.035082397999985915 
-	minimum: 0.014814321999892854 
+	standard deviation: 0.0011936974032216927 
+	variance: 1.4249134904582121e-06 
+	arithmetic mean: 0.010159316333332906 
+	median: 0.009902836499998457 
+	maximum: 0.01291648400000156 
+	minimum: 0.008326344000000319 
 
 - Standard Double-and-add Timing -------------------------------------------------- 
-	standard deviation: 0.003739953029279814 
-	mean: 0.01434092969999862 
-	variance: 1.3987248661219257e-05 
-	arithmetic mean: 0.01434092969999862 
-	median: 0.013517140000089967 
-	maximum: 0.025268082000138747 
-	minimum: 0.00999498000010135 
+	standard deviation: 0.0011836561077079612 
+	variance: 1.4010417813143605e-06 
+	arithmetic mean: 0.007258792266666584 
+	median: 0.007119377000000426 
+	maximum: 0.011073487999997411 
+	minimum: 0.004858743999999859 
 
     Multiplicant   Multiplicant (bin)  Montgomery Ladder time  Standard DAA time  Results equal
-0         284059  1000101010110011011                0.020640           0.019494           True
-1         284083  1000101010110110011                0.020899           0.015457           True
-2         284093  1000101010110111101                0.019720           0.014371           True
-3         284111  1000101010111001111                0.021069           0.013704           True
-4         284117  1000101010111010101                0.035082           0.025268           True
-5         284129  1000101010111100001                0.026100           0.019693           True
-6         284131  1000101010111100011                0.021406           0.019097           True
-7         284149  1000101010111110101                0.019503           0.015278           True
-8         284153  1000101010111111001                0.017378           0.013718           True
-9         284159  1000101010111111111                0.014838           0.013331           True
-10        284161  1000101011000000001                0.016214           0.010289           True
-11        284173  1000101011000001101                0.014814           0.010387           True
-12        284191  1000101011000011111                0.016015           0.012718           True
-13        284201  1000101011000101001                0.016023           0.010236           True
-14        284227  1000101011001000011                0.016029           0.010454           True
-15        284231  1000101011001000111                0.015728           0.011445           True
-16        284233  1000101011001001001                0.015695           0.009995           True
-17        284237  1000101011001001101                0.016019           0.010985           True
-18        284243  1000101011001010011                0.015152           0.010886           True
-19        284261  1000101011001100101                0.015415           0.010346           True
-20        284267  1000101011001101011                0.022281           0.015396           True
-21        284269  1000101011001101101                0.026477           0.018722           True
-22        284293  1000101011010000101                0.028949           0.018628           True
-23        284311  1000101011010010111                0.026557           0.018085           True
-24        284341  1000101011010110101                0.025185           0.018339           True
-25        284357  1000101011011000101                0.018751           0.014312           True
-26        284369  1000101011011010001                0.016187           0.013028           True
-27        284377  1000101011011011001                0.015651           0.011941           True
-28        284387  1000101011011100011                0.015141           0.011616           True
-29        284407  1000101011011110111                0.016495           0.013010           True
+0         284059  1000101010110011011                0.009121           0.007513           True
+1         284083  1000101010110110011                0.008478           0.005865           True
+2         284093  1000101010110111101                0.010549           0.006439           True
+3         284111  1000101010111001111                0.010894           0.007850           True
+4         284117  1000101010111010101                0.009997           0.007771           True
+5         284129  1000101010111100001                0.009210           0.006830           True
+6         284131  1000101010111100011                0.009033           0.006469           True
+7         284149  1000101010111110101                0.010778           0.006634           True
+8         284153  1000101010111111001                0.009083           0.007117           True
+9         284159  1000101010111111111                0.008613           0.006965           True
+10        284161  1000101011000000001                0.009523           0.004859           True
+11        284173  1000101011000001101                0.009299           0.006532           True
+12        284191  1000101011000011111                0.010768           0.007106           True
+13        284201  1000101011000101001                0.009815           0.006187           True
+14        284227  1000101011001000011                0.009231           0.006226           True
+15        284231  1000101011001000111                0.008326           0.006207           True
+16        284233  1000101011001001001                0.008918           0.005656           True
+17        284237  1000101011001001101                0.011385           0.007561           True
+18        284243  1000101011001010011                0.012916           0.008525           True
+19        284261  1000101011001100101                0.011066           0.007541           True
+20        284267  1000101011001101011                0.010575           0.007830           True
+21        284269  1000101011001101101                0.011029           0.008748           True
+22        284293  1000101011010000101                0.009858           0.007782           True
+23        284311  1000101011010010111                0.009623           0.007122           True
+24        284341  1000101011010110101                0.009714           0.007043           True
+25        284357  1000101011011000101                0.009948           0.007239           True
+26        284369  1000101011011010001                0.010967           0.008420           True
+27        284377  1000101011011011001                0.012743           0.007234           True
+28        284387  1000101011011100011                0.012472           0.011073           True
+29        284407  1000101011011110111                0.010845           0.009421           True
 
 ================================= Curve:  brainpoolP256r1 , samples bit size:  24 =================================
 - Montgomery Ladder Timing -------------------------------------------------------- 
-	standard deviation: 0.0018992210161593631 
-	mean: 0.011270510333315543 
-	variance: 3.607040468221404e-06 
-	arithmetic mean: 0.011270510333315543 
-	median: 0.010886049999953684 
-	maximum: 0.016266212999880736 
-	minimum: 0.00876725299985992 
+	standard deviation: 0.0009067171557132328 
+	variance: 8.22136000464695e-07 
+	arithmetic mean: 0.00702010836666697 
+	median: 0.006768140500000186 
+	maximum: 0.010577060000002803 
+	minimum: 0.006009702000000061 
 
 - Standard Double-and-add Timing -------------------------------------------------- 
-	standard deviation: 0.0012742681146979055 
-	mean: 0.008095948666694615 
-	variance: 1.6237592281357543e-06 
-	arithmetic mean: 0.008095948666694615 
-	median: 0.007901179500095168 
-	maximum: 0.010885888000075283 
-	minimum: 0.006182779000027949 
+	standard deviation: 0.0006479176987325829 
+	variance: 4.19797344330926e-07 
+	arithmetic mean: 0.0050428123000000845 
+	median: 0.004834940000000287 
+	maximum: 0.006677488000001119 
+	minimum: 0.004312594000001724 
 
     Multiplicant        Multiplicant (bin)  Montgomery Ladder time  Standard DAA time  Results equal
-0       14837491  111000100110011011110011                0.010482           0.007849           True
-1       14837503  111000100110011011111111                0.010085           0.008557           True
-2       14837513  111000100110011100001001                0.009934           0.007038           True
-3       14837519  111000100110011100001111                0.009593           0.007324           True
-4       14837527  111000100110011100010111                0.009591           0.007293           True
-5       14837533  111000100110011100011101                0.008828           0.006839           True
-6       14837539  111000100110011100100011                0.009281           0.006183           True
-7       14837551  111000100110011100101111                0.009041           0.006921           True
-8       14837587  111000100110011101010011                0.008767           0.006681           True
-9       14837591  111000100110011101010111                0.009297           0.006832           True
-10      14837593  111000100110011101011001                0.009817           0.006937           True
-11      14837609  111000100110011101101001                0.009557           0.007030           True
-12      14837653  111000100110011110010101                0.011072           0.008623           True
-13      14837657  111000100110011110011001                0.016266           0.008074           True
-14      14837663  111000100110011110011111                0.014355           0.010375           True
-15      14837677  111000100110011110101101                0.013906           0.009907           True
-16      14837681  111000100110011110110001                0.013383           0.010204           True
-17      14837687  111000100110011110110111                0.013178           0.009650           True
-18      14837707  111000100110011111001011                0.013522           0.010886           True
-19      14837723  111000100110011111011011                0.013781           0.009911           True
-20      14837743  111000100110011111101111                0.013107           0.009924           True
-21      14837789  111000100110100000011101                0.011307           0.008405           True
-22      14837807  111000100110100000101111                0.012441           0.008291           True
-23      14837839  111000100110100001001111                0.011318           0.007954           True
-24      14837857  111000100110100001100001                0.011904           0.007099           True
-25      14837861  111000100110100001100101                0.011725           0.007301           True
-26      14837873  111000100110100001110001                0.011356           0.007671           True
-27      14837891  111000100110100010000011                0.010209           0.006934           True
-28      14837897  111000100110100010001001                0.010313           0.007954           True
-29      14837899  111000100110100010001011                0.010700           0.008230           True
+0       14837491  111000100110011011110011                0.007367           0.004840           True
+1       14837503  111000100110011011111111                0.006125           0.005617           True
+2       14837513  111000100110011100001001                0.007122           0.004337           True
+3       14837519  111000100110011100001111                0.006400           0.004525           True
+4       14837527  111000100110011100010111                0.006010           0.005105           True
+5       14837533  111000100110011100011101                0.006927           0.004827           True
+6       14837539  111000100110011100100011                0.006283           0.004313           True
+7       14837551  111000100110011100101111                0.006094           0.004851           True
+8       14837587  111000100110011101010011                0.006947           0.004830           True
+9       14837591  111000100110011101010111                0.006718           0.004648           True
+10      14837593  111000100110011101011001                0.006471           0.005082           True
+11      14837609  111000100110011101101001                0.007614           0.005351           True
+12      14837653  111000100110011110010101                0.007331           0.004414           True
+13      14837657  111000100110011110011001                0.006290           0.004719           True
+14      14837663  111000100110011110011111                0.007252           0.005880           True
+15      14837677  111000100110011110101101                0.007209           0.005867           True
+16      14837681  111000100110011110110001                0.008103           0.004635           True
+17      14837687  111000100110011110110111                0.010577           0.005659           True
+18      14837707  111000100110011111001011                0.007851           0.006399           True
+19      14837723  111000100110011111011011                0.006818           0.005674           True
+20      14837743  111000100110011111101111                0.006386           0.006128           True
+21      14837789  111000100110100000011101                0.007478           0.004543           True
+22      14837807  111000100110100000101111                0.006704           0.004568           True
+23      14837839  111000100110100001001111                0.008599           0.005140           True
+24      14837857  111000100110100001100001                0.006413           0.006677           True
+25      14837861  111000100110100001100101                0.006708           0.004934           True
+26      14837873  111000100110100001110001                0.006641           0.004367           True
+27      14837891  111000100110100010000011                0.006257           0.004575           True
+28      14837897  111000100110100010001001                0.007447           0.004426           True
+29      14837899  111000100110100010001011                0.006462           0.004353           True
 
 ================================= Curve:  brainpoolP512r1 , samples bit size:  24 =================================
 - Montgomery Ladder Timing -------------------------------------------------------- 
-	standard deviation: 0.004894820420294454 
-	mean: 0.025949324733346657 
-	variance: 2.395926694693158e-05 
-	arithmetic mean: 0.025949324733346657 
-	median: 0.0251583725000728 
-	maximum: 0.03406444899997041 
-	minimum: 0.018906191000041872 
+	standard deviation: 0.0014445520996749035 
+	variance: 2.086730768675172e-06 
+	arithmetic mean: 0.01361758036666636 
+	median: 0.013312727500000676 
+	maximum: 0.01944433799999956 
+	minimum: 0.011594160999997882 
 
 - Standard Double-and-add Timing -------------------------------------------------- 
-	standard deviation: 0.004717202873205884 
-	mean: 0.019653225566662512 
-	variance: 2.2252002946981848e-05 
-	arithmetic mean: 0.019653225566662512 
-	median: 0.019495955499905904 
-	maximum: 0.028304178999860596 
-	minimum: 0.013189407000027131 
+	standard deviation: 0.001166789624103219 
+	variance: 1.3613980269149314e-06 
+	arithmetic mean: 0.01020038459999988 
+	median: 0.009976953499998942 
+	maximum: 0.012516001999998139 
+	minimum: 0.008464255999999892 
 
     Multiplicant        Multiplicant (bin)  Montgomery Ladder time  Standard DAA time  Results equal
-0       14837491  111000100110011011110011                0.023505           0.018507           True
-1       14837503  111000100110011011111111                0.023756           0.020191           True
-2       14837513  111000100110011100001001                0.024554           0.016875           True
-3       14837519  111000100110011100001111                0.022966           0.017201           True
-4       14837527  111000100110011100010111                0.022331           0.016741           True
-5       14837533  111000100110011100011101                0.027706           0.017269           True
-6       14837539  111000100110011100100011                0.028135           0.018800           True
-7       14837551  111000100110011100101111                0.025763           0.020194           True
-8       14837587  111000100110011101010011                0.028022           0.020439           True
-9       14837591  111000100110011101010111                0.030479           0.022679           True
-10      14837593  111000100110011101011001                0.031113           0.026251           True
-11      14837609  111000100110011101101001                0.031882           0.024952           True
-12      14837653  111000100110011110010101                0.029892           0.027144           True
-13      14837657  111000100110011110011001                0.032283           0.024010           True
-14      14837663  111000100110011110011111                0.032512           0.027458           True
-15      14837677  111000100110011110101101                0.030330           0.021778           True
-16      14837681  111000100110011110110001                0.032404           0.022941           True
-17      14837687  111000100110011110110111                0.034064           0.028304           True
-18      14837707  111000100110011111001011                0.032164           0.026016           True
-19      14837723  111000100110011111011011                0.029283           0.023421           True
-20      14837743  111000100110011111101111                0.023619           0.020622           True
-21      14837789  111000100110100000011101                0.022705           0.015368           True
-22      14837807  111000100110100000101111                0.019823           0.015723           True
-23      14837839  111000100110100001001111                0.019556           0.014238           True
-24      14837857  111000100110100001100001                0.019277           0.013189           True
-25      14837861  111000100110100001100101                0.020209           0.013880           True
-26      14837873  111000100110100001110001                0.018906           0.013765           True
-27      14837891  111000100110100010000011                0.020161           0.013213           True
-28      14837897  111000100110100010001001                0.021186           0.013836           True
-29      14837899  111000100110100010001011                0.019894           0.014591           True
+0       14837491  111000100110011011110011                0.014235           0.012231           True
+1       14837503  111000100110011011111111                0.019444           0.011587           True
+2       14837513  111000100110011100001001                0.014699           0.012516           True
+3       14837519  111000100110011100001111                0.015443           0.012206           True
+4       14837527  111000100110011100010111                0.015123           0.010097           True
+5       14837533  111000100110011100011101                0.014323           0.012081           True
+6       14837539  111000100110011100100011                0.014086           0.010056           True
+7       14837551  111000100110011100101111                0.015293           0.010977           True
+8       14837587  111000100110011101010011                0.013302           0.011885           True
+9       14837591  111000100110011101010111                0.013855           0.009803           True
+10      14837593  111000100110011101011001                0.013102           0.010269           True
+11      14837609  111000100110011101101001                0.013872           0.009741           True
+12      14837653  111000100110011110010101                0.013323           0.010579           True
+13      14837657  111000100110011110011001                0.013637           0.011270           True
+14      14837663  111000100110011110011111                0.013437           0.010161           True
+15      14837677  111000100110011110101101                0.012154           0.009605           True
+16      14837681  111000100110011110110001                0.012996           0.009267           True
+17      14837687  111000100110011110110111                0.012290           0.009898           True
+18      14837707  111000100110011111001011                0.011594           0.008995           True
+19      14837723  111000100110011111011011                0.012525           0.010894           True
+20      14837743  111000100110011111101111                0.012514           0.009873           True
+21      14837789  111000100110100000011101                0.012352           0.008667           True
+22      14837807  111000100110100000101111                0.012660           0.008705           True
+23      14837839  111000100110100001001111                0.013037           0.010307           True
+24      14837857  111000100110100001100001                0.012006           0.008464           True
+25      14837861  111000100110100001100101                0.012867           0.008711           True
+26      14837873  111000100110100001110001                0.013295           0.009532           True
+27      14837891  111000100110100010000011                0.013238           0.008879           True
+28      14837897  111000100110100010001001                0.014180           0.009346           True
+29      14837899  111000100110100010001011                0.013645           0.009409           True
 
 </pre>
 </div>
