@@ -13977,6 +13977,45 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="1-Elliptic-curves">1 Elliptic curves<a class="anchor-link" href="#1-Elliptic-curves">&#182;</a></h2><h3 id="1.1-Elliptic-curve:-definition">1.1 Elliptic curve: definition<a class="anchor-link" href="#1.1-Elliptic-curve:-definition">&#182;</a></h3><p>Elliptic curves are defined over a field $K$ and describe points in its cartesian product $K^2$; they are smooth and projective affine algebraic structures.</p>
+<p>The Weierstrass equation of an elliptic curve $E$ over a field $K$ is <a href="#references">[1]</a>:</p>
+$$ E : y^2 + a_1xy + a_3y = x^3 + a_2x^2 + a_4x + a_6 $$<p>what in case of the fields with characteristic different than 2 or 3 (i.e. the smallest number of summands $n$ of the field's identity element $e$ so $ne=0$), the affinitic equation of the elliptic curve can be simplified to:</p>
+$$ E : y^2 = x^3 + Ax + B $$<p>$$A, B \in K$$</p>
+<h3 id="1.2-Elliptic-curve:-point-addition">1.2 Elliptic curve: point addition<a class="anchor-link" href="#1.2-Elliptic-curve:-point-addition">&#182;</a></h3><p>The structure of elliptic curves fulfills the necessary requirements for its points to form an algebraic group with a certain addition law.</p>
+<div align="center">
+<img width="500" src="assets/operations-on-ec.png" >
+</div>
+<div align="center">
+Fig. 1.1: Operations on en elliptic curve [[2]](#references)
+</div><p>With $P, Q \in E$ - being two points on an elliptic curve group $E$ - and $L$ being the line connecting those points, the third point $R$ can be defined where the intersection of $L$ with $E$ happens. Then, the result of $P+Q$ is located on the residual point of the intersection $R'$.</p>
+<p>The coordinates of the result ($x_{res}$, $y_{res}$) can be calculated as:
+$$x_{res} = s^2-x_p-x_q$$
+$$y_{res} = -y_p+s(x_p-x_{res})$$
+with $s$ being the slope of the line $L$ through $P$ and $Q$: 
+$$s= y_p-y_q/x_p-x_q$$</p>
+<p>With $O$ being the neutral point in the group $E$, the following properties are fullfiled:</p>
+<ul>
+<li>$P + O = P$</li>
+<li>$P + Q = Q + P$</li>
+<li>if $P \in E$ then there exists a point $Q$ such that $P + Q = O$</li>
+<li>if $P, Q \in E$ then $P + Q \in E$</li>
+<li>for $P, Q, R \in E$ is satisfied $(P + Q) + R = P + (Q + R)$ </li>
+</ul>
+<h3 id="1.4-Multiplication-of-EC-point-with-integer">1.4 Multiplication of EC point with integer<a class="anchor-link" href="#1.4-Multiplication-of-EC-point-with-integer">&#182;</a></h3><p>Any point $P$ on the elliptic curve can be added to itself resulting in: 
+$$ P + P = 2 * P $$</p>
+<p>Continuing the addition multiple $n$ times yeilds to:</p>
+$$ P * n = P + P + ... + P (n-times)$$<p>As multiplication is defined by the point addition, it always results in another point on the elliptic curve.</p>
+<p>For point doubling, i.e. $R = 2*P = P + P$, the following formula holds: 
+$$x_{R} = s^2-2x_p$$
+$$y_{R} = -y_p+s(x_p-x_{res})$$
+with $s$: 
+$$s= (3x_p^2+a)/2y_p$$</p>
+<h3 id="1.5-Elliptic-Curves-over-finite-field">1.5 Elliptic Curves over finite field<a class="anchor-link" href="#1.5-Elliptic-Curves-over-finite-field">&#182;</a></h3><p>The ECs used in ECC are strictly defined over finite field $Fp$, with $p$ being a prime number bigger than 3. Hence, the field is a square matrix with dimensions $p \times p$. Hence, the points of a given curve are limited to integer coordinates within its field matrix and all algebraic operations will result in a point within that field.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="2-NIST-elliptic-curves">2 NIST elliptic curves<a class="anchor-link" href="#2-NIST-elliptic-curves">&#182;</a></h2><h3 id="2.1-NIST-Standard">2.1 NIST Standard<a class="anchor-link" href="#2.1-NIST-Standard">&#182;</a></h3><p>National Institute of Standards and Technology (NIST) is an American national institute, working under the provisions of the Federal Information Security Management Act. It defines the standars of the curves and its parameters for different key-lengths, in order to achieve implementation with base security accepted by the USA government. As well, it outlines key-establishment schemes, key-derivation and key-pair managements methods, as well as recommendations for DLC-based (Discrete Logarithm Cryptography) key-agreement schemes<a href="#references">[4]</a>.</p>
 <p>For each key-length NIST provides two types of fields<a href="#references">[5]</a>:</p>
 <ul>
@@ -14090,45 +14129,6 @@ Fig. 2.1: Examples of curve E with different coefficients b, interactive access:
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="1-Elliptic-curves">1 Elliptic curves<a class="anchor-link" href="#1-Elliptic-curves">&#182;</a></h2><h3 id="1.1-Elliptic-curve:-definition">1.1 Elliptic curve: definition<a class="anchor-link" href="#1.1-Elliptic-curve:-definition">&#182;</a></h3><p>Elliptic curves are defined over a field $K$ and describe points in its cartesian product $K^2$; they are smooth and projective affine algebraic structures.</p>
-<p>The Weierstrass equation of an elliptic curve $E$ over a field $K$ is <a href="#references">[1]</a>:</p>
-$$ E : y^2 + a_1xy + a_3y = x^3 + a_2x^2 + a_4x + a_6 $$<p>what in case of the fields with characteristic different than 2 or 3 (i.e. the smallest number of summands $n$ of the field's identity element $e$ so $ne=0$), the affinitic equation of the elliptic curve can be simplified to:</p>
-$$ E : y^2 = x^3 + Ax + B $$<p>$$A, B \in K$$</p>
-<h3 id="1.2-Elliptic-curve:-point-addition">1.2 Elliptic curve: point addition<a class="anchor-link" href="#1.2-Elliptic-curve:-point-addition">&#182;</a></h3><p>The structure of elliptic curves fulfills the necessary requirements for its points to form an algebraic group with a certain addition law.</p>
-<div align="center">
-<img width="500" src="assets/operations-on-ec.png" >
-</div>
-<div align="center">
-Fig. 1.1: Operations on en elliptic curve [[2]](#references)
-</div><p>With $P, Q \in E$ - being two points on an elliptic curve group $E$ - and $L$ being the line connecting those points, the third point $R$ can be defined where the intersection of $L$ with $E$ happens. Then, the result of $P+Q$ is located on the residual point of the intersection $R'$.</p>
-<p>The coordinates of the result ($x_{res}$, $y_{res}$) can be calculated as:
-$$x_{res} = s^2-x_p-x_q$$
-$$y_{res} = -y_p+s(x_p-x_{res})$$
-with $s$ being the slope of the line $L$ through $P$ and $Q$: 
-$$s= y_p-y_q/x_p-x_q$$</p>
-<p>With $O$ being the neutral point in the group $E$, the following properties are fullfiled:</p>
-<ul>
-<li>$P + O = P$</li>
-<li>$P + Q = Q + P$</li>
-<li>if $P \in E$ then there exists a point $Q$ such that $P + Q = O$</li>
-<li>if $P, Q \in E$ then $P + Q \in E$</li>
-<li>for $P, Q, R \in E$ is satisfied $(P + Q) + R = P + (Q + R)$ </li>
-</ul>
-<h3 id="1.4-Multiplication-of-EC-point-with-integer">1.4 Multiplication of EC point with integer<a class="anchor-link" href="#1.4-Multiplication-of-EC-point-with-integer">&#182;</a></h3><p>Any point $P$ on the elliptic curve can be added to itself resulting in: 
-$$ P + P = 2 * P $$</p>
-<p>Continuing the addition multiple $n$ times yeilds to:</p>
-$$ P * n = P + P + ... + P (n-times)$$<p>As multiplication is defined by the point addition, it always results in another point on the elliptic curve.</p>
-<p>For point doubling, i.e. $R = 2*P = P + P$, the following formula holds: 
-$$x_{R} = s^2-2x_p$$
-$$y_{R} = -y_p+s(x_p-x_{res})$$
-with $s$: 
-$$s= (3x_p^2+a)/2y_p$$</p>
-<h3 id="1.5-Elliptic-Curves-over-finite-field">1.5 Elliptic Curves over finite field<a class="anchor-link" href="#1.5-Elliptic-Curves-over-finite-field">&#182;</a></h3><p>The ECs used in ECC are strictly defined over finite field $Fp$, with $p$ being a prime number bigger than 3. Hence, the field is a square matrix with dimensions $p \times p$. Hence, the points of a given curve are limited to integer coordinates within its field matrix and all algebraic operations will result in a point within that field.</p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="3-Brainpool-elliptic-curves">3 Brainpool elliptic curves<a class="anchor-link" href="#3-Brainpool-elliptic-curves">&#182;</a></h2><h3 id="3.1-Brainpool-standard">3.1 Brainpool standard<a class="anchor-link" href="#3.1-Brainpool-standard">&#182;</a></h3><p>Brainpool elliptic curves are curves which are standardized by the Internet Engineering Task Force (IETF) - an international open standards organization - and are described in RFC-5639<a href="#references">[8]</a>.</p>
 <p>It presents a set of domain parameters defining cryptographically strong groups on elliptic curves for different key-length encryption schemes.</p>
 <p>The curves are described with regard to Wierstrass' definition: 
@@ -14236,7 +14236,7 @@ Below are presented the specifications of the processor.</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">run</span> systemInfo.py
@@ -14264,14 +14264,14 @@ Below are presented the specifications of the processor.</p>
 [+] Operating System Version : #101~18.04.1-Ubuntu SMP Fri Oct 22 09:25:04 UTC 2021
 [+] Platform : Linux-5.4.0-90-generic-x86_64-with-glibc2.27
 [+] Processor : x86_64
-[+] System Uptime : 117:3 hours
-[+] Total number of processes : 887
+[+] System Uptime : 0:27 hours
+[+] Total number of processes : 357
 [+] Number of Physical cores : 4
 [+] Number of Total cores : 8
 [+] Max Frequency : 4900.00Mhz
 [+] Min Frequency : 400.00Mhz
-[+] Current Frequency : 2600.76Mhz
-[+] Total CPU Usage : 9.9%
+[+] Current Frequency : 1190.73Mhz
+[+] Total CPU Usage : 13.9%
 [+] Processor 0 :  Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 [+] Processor 1 :  Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 [+] Processor 2 :  Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
@@ -14281,13 +14281,13 @@ Below are presented the specifications of the processor.</p>
 [+] Processor 6 :  Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 [+] Processor 7 :  Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 [+] Total Memory present : 15.34 Gb
-[+] Total Memory Available : 2.6 Gb
-[+] Total Memory Used : 11.44 Gb
-[+] Percentage Used : 83.1 %
+[+] Total Memory Available : 12.02 Gb
+[+] Total Memory Used : 2.51 Gb
+[+] Percentage Used : 21.7 %
 [+] Total swap memory : 32.0
-[+] Free swap memory : 16.72
-[+] Used swap memory : 15.28
-[+] Percentage Used : 47.8%
+[+] Free swap memory : 32.0
+[+] Used swap memory : 0.0
+[+] Percentage Used : 0.0%
 </pre>
 </div>
 </div>
@@ -14348,7 +14348,7 @@ Below are presented the specifications of the processor.</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">reset</span>
@@ -14362,7 +14362,7 @@ Below are presented the specifications of the processor.</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span> 
@@ -14411,7 +14411,7 @@ Below are presented the specifications of the processor.</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
@@ -14465,7 +14465,7 @@ Below are presented the specifications of the processor.</p>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">getCurve</span><span class="p">(</span><span class="n">ELLIPTIC_CURVES</span><span class="o">.</span><span class="n">bp256</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
@@ -14504,7 +14504,7 @@ EllipticCurve(a=5669818760532611004362722839617834607712061453947521410938682818
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -14571,7 +14571,7 @@ GcdProps(gcd=3, x=34, y=-61)
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># check if point is on curve [in the field Fp]</span>
@@ -14599,7 +14599,7 @@ GcdProps(gcd=3, x=34, y=-61)
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ec1</span> <span class="o">=</span> <span class="n">getCurve</span><span class="p">(</span><span class="n">ELLIPTIC_CURVES</span><span class="o">.</span><span class="n">bp256</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
@@ -14640,7 +14640,7 @@ True
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># slope of the line crossing p1, p2 and inverse of result </span>
@@ -14713,7 +14713,7 @@ Point(x=525759695601913515345420914663801060410285817186408752374410730116160256
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
@@ -14741,7 +14741,7 @@ Point(x=525759695601913515345420914663801060410285817186408752374410730116160256
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># normal multiplication n*P</span>
@@ -14767,7 +14767,7 @@ Point(x=525759695601913515345420914663801060410285817186408752374410730116160256
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">toBinary</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="nb">bin</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
@@ -14796,7 +14796,7 @@ Point(x=525759695601913515345420914663801060410285817186408752374410730116160256
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[39]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">multSlow</span> <span class="o">=</span> <span class="n">pointMultiplySlow</span><span class="p">(</span><span class="n">ec1</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
@@ -14832,9 +14832,9 @@ Point(x=525759695601913515345420914663801060410285817186408752374410730116160256
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Slow multiplication:  10.337105427000001 s
-Fast multiplication (double-add):  0.002713084999999893 s
-Difference (slow - fast):  10.334392342000001 s
+<pre>Slow multiplication:  17.094601722 s
+Fast multiplication (double-add):  0.004490628000002772 s
+Difference (slow - fast):  17.090111093999997 s
 </pre>
 </div>
 </div>
@@ -14846,7 +14846,7 @@ Difference (slow - fast):  10.334392342000001 s
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[40]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Montgomery ladder double and add algorithm </span>
@@ -14900,7 +14900,7 @@ Difference (slow - fast):  10.334392342000001 s
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[41]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># short hand notation for base point of the curve</span>
@@ -14913,6 +14913,9 @@ Difference (slow - fast):  10.334392342000001 s
 
 <span class="c1"># montgomery ladder is the default algorithm for multiplication</span>
 <span class="n">pointMultiplication</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">EllipticCurve</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Point</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">ec</span><span class="p">,</span> <span class="n">bits</span><span class="p">:</span> <span class="n">montgomeryDoubleAndAdd</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="n">ec</span><span class="o">.</span><span class="n">base</span><span class="p">,</span> <span class="n">bits</span><span class="p">)</span>
+
+<span class="c1"># montgomery ladder is the default algorithm for multiplication</span>
+<span class="n">anyPointsMultiplication</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">EllipticCurve</span><span class="p">,</span> <span class="n">Point</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Point</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">ec</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">bits</span><span class="p">:</span> <span class="n">montgomeryDoubleAndAdd</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">bits</span><span class="p">)</span>
 
 <span class="c1"># point multiplication (montgomery ladder) with conversion to binary included </span>
 <span class="n">pointMultiplyWithInt</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">EllipticCurve</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">Point</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">ec</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="n">montgomeryDoubleAndAdd</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="n">ec</span><span class="o">.</span><span class="n">base</span><span class="p">,</span> <span class="n">toBinary</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
@@ -14933,7 +14936,7 @@ Difference (slow - fast):  10.334392342000001 s
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[42]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -14969,7 +14972,7 @@ Difference (slow - fast):  10.334392342000001 s
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[43]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[37]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">measureDoubleAndAdd</span><span class="p">(</span><span class="n">ec</span><span class="p">:</span> <span class="n">EllipticCurve</span><span class="p">,</span> <span class="n">scalars</span><span class="p">:</span> <span class="n">List</span><span class="p">):</span>
@@ -15069,297 +15072,297 @@ Difference (slow - fast):  10.334392342000001 s
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>================================= Curve:  brainpoolP256r1 , samples bit size:  14 =================================
 - Montgomery Ladder Timing -------------------------------------------------------- 
-	standard deviation: 0.0007548801765034043 
-	variance: 5.698440808778109e-07 
-	arithmetic mean: 0.003748938999999633 
-	median: 0.0035187564999983323 
-	maximum: 0.005868776999999881 
-	minimum: 0.002840479999999701 
+	standard deviation: 0.0007860222000046378 
+	variance: 6.178308989001308e-07 
+	arithmetic mean: 0.00510775866666601 
+	median: 0.004651086000006188 
+	maximum: 0.007175843999995379 
+	minimum: 0.004564157000004343 
 
 - Standard Double-and-add Timing -------------------------------------------------- 
-	standard deviation: 0.0006238278146219745 
-	variance: 3.891611422960285e-07 
-	arithmetic mean: 0.002809679933333579 
-	median: 0.002632143500001405 
-	maximum: 0.004576283000002235 
-	minimum: 0.002155230999999702 
+	standard deviation: 0.0006034981624561635 
+	variance: 3.642100320879659e-07 
+	arithmetic mean: 0.0037977051333342613 
+	median: 0.003578678499998489 
+	maximum: 0.0062158460000034665 
+	minimum: 0.0031908280000010336 
 
     Multiplicant Multiplicant (bin)  Montgomery Ladder time  Standard DAA time  Results equal
-0          11731     10110111010011                0.005510           0.003236           True
-1          11743     10110111011111                0.003736           0.004576           True
-2          11777     10111000000001                0.005191           0.002507           True
-3          11779     10111000000011                0.004537           0.004115           True
-4          11783     10111000000111                0.005869           0.002830           True
-5          11789     10111000001101                0.003849           0.002836           True
-6          11801     10111000011001                0.004210           0.003267           True
-7          11807     10111000011111                0.004044           0.003865           True
-8          11813     10111000100101                0.003890           0.002894           True
-9          11821     10111000101101                0.004116           0.002732           True
-10         11827     10111000110011                0.003528           0.002535           True
-11         11831     10111000110111                0.004002           0.002634           True
-12         11833     10111000111001                0.003510           0.002499           True
-13         11839     10111000111111                0.003418           0.002658           True
-14         11863     10111001010111                0.003612           0.003077           True
-15         11867     10111001011011                0.003252           0.002631           True
-16         11887     10111001101111                0.003314           0.002747           True
-17         11897     10111001111001                0.003241           0.002566           True
-18         11903     10111001111111                0.003143           0.002745           True
-19         11909     10111010000101                0.003020           0.002155           True
-20         11923     10111010010011                0.003112           0.002162           True
-21         11927     10111010010111                0.003205           0.002526           True
-22         11933     10111010011101                0.003455           0.002444           True
-23         11939     10111010100011                0.003107           0.002419           True
-24         11941     10111010100101                0.003023           0.002196           True
-25         11953     10111010110001                0.004686           0.002353           True
-26         11959     10111010110111                0.003944           0.004276           True
-27         11969     10111011000001                0.003129           0.002178           True
-28         11971     10111011000011                0.002977           0.002268           True
-29         11981     10111011001101                0.002840           0.002363           True
+0          11731     10110111010011                0.006233           0.005081           True
+1          11743     10110111011111                0.007176           0.006216           True
+2          11777     10111000000001                0.006902           0.004003           True
+3          11779     10111000000011                0.006416           0.004246           True
+4          11783     10111000000111                0.005984           0.004175           True
+5          11789     10111000001101                0.006105           0.004134           True
+6          11801     10111000011001                0.005008           0.003713           True
+7          11807     10111000011111                0.004886           0.003790           True
+8          11813     10111000100101                0.004848           0.003424           True
+9          11821     10111000101101                0.004755           0.003562           True
+10         11827     10111000110011                0.004649           0.003382           True
+11         11831     10111000110111                0.004602           0.003524           True
+12         11833     10111000111001                0.004625           0.003309           True
+13         11839     10111000111111                0.004784           0.003683           True
+14         11863     10111001010111                0.004995           0.003586           True
+15         11867     10111001011011                0.004957           0.003899           True
+16         11887     10111001101111                0.004595           0.003960           True
+17         11897     10111001111001                0.004569           0.003571           True
+18         11903     10111001111111                0.004568           0.003842           True
+19         11909     10111010000101                0.004626           0.003255           True
+20         11923     10111010010011                0.004607           0.003384           True
+21         11927     10111010010111                0.004635           0.003569           True
+22         11933     10111010011101                0.004603           0.003545           True
+23         11939     10111010100011                0.004581           0.003350           True
+24         11941     10111010100101                0.004564           0.003321           True
+25         11953     10111010110001                0.006477           0.004507           True
+26         11959     10111010110111                0.004653           0.003762           True
+27         11969     10111011000001                0.004621           0.003191           True
+28         11971     10111011000011                0.004578           0.003416           True
+29         11981     10111011001101                0.004628           0.003531           True
 
 ================================= Curve:  brainpoolP512r1 , samples bit size:  14 =================================
 - Montgomery Ladder Timing -------------------------------------------------------- 
-	standard deviation: 0.0009272605970364594 
-	variance: 8.598122148164111e-07 
-	arithmetic mean: 0.007645231066666962 
-	median: 0.007335874000000686 
-	maximum: 0.011666913999999196 
-	minimum: 0.006802823000001013 
+	standard deviation: 0.0008966889252673449 
+	variance: 8.040510286971061e-07 
+	arithmetic mean: 0.011110553500000009 
+	median: 0.010847151499998375 
+	maximum: 0.014085552999993922 
+	minimum: 0.009956111000001044 
 
 - Standard Double-and-add Timing -------------------------------------------------- 
-	standard deviation: 0.0009194335487465626 
-	variance: 8.453580505606978e-07 
-	arithmetic mean: 0.005657672799999721 
-	median: 0.005420478499999604 
-	maximum: 0.009281878999999549 
-	minimum: 0.004442162000000138 
+	standard deviation: 0.0010359271446680844 
+	variance: 1.0731450490601702e-06 
+	arithmetic mean: 0.008396928300000184 
+	median: 0.008230667999999497 
+	maximum: 0.010651060000000712 
+	minimum: 0.006423644000001616 
 
     Multiplicant Multiplicant (bin)  Montgomery Ladder time  Standard DAA time  Results equal
-0          11731     10110111010011                0.007238           0.004589           True
-1          11743     10110111011111                0.006803           0.006498           True
-2          11777     10111000000001                0.007719           0.004442           True
-3          11779     10111000000011                0.007051           0.005054           True
-4          11783     10111000000111                0.007282           0.004988           True
-5          11789     10111000001101                0.006993           0.005023           True
-6          11801     10111000011001                0.007601           0.005481           True
-7          11807     10111000011111                0.007347           0.007347           True
-8          11813     10111000100101                0.007325           0.005383           True
-9          11821     10111000101101                0.007541           0.005290           True
-10         11827     10111000110011                0.008004           0.005253           True
-11         11831     10111000110111                0.007893           0.005883           True
-12         11833     10111000111001                0.007055           0.005267           True
-13         11839     10111000111111                0.007149           0.006598           True
-14         11863     10111001010111                0.007215           0.005438           True
-15         11867     10111001011011                0.006914           0.005498           True
-16         11887     10111001101111                0.006921           0.006042           True
-17         11897     10111001111001                0.006952           0.005493           True
-18         11903     10111001111111                0.007045           0.005826           True
-19         11909     10111010000101                0.007721           0.004663           True
-20         11923     10111010010011                0.009530           0.005112           True
-21         11927     10111010010111                0.011667           0.009282           True
-22         11933     10111010011101                0.008144           0.006768           True
-23         11939     10111010100011                0.007165           0.005349           True
-24         11941     10111010100101                0.007796           0.005382           True
-25         11953     10111010110001                0.007958           0.005584           True
-26         11959     10111010110111                0.008083           0.005842           True
-27         11969     10111011000001                0.008125           0.005161           True
-28         11971     10111011000011                0.007841           0.005403           True
-29         11981     10111011001101                0.007278           0.005791           True
+0          11731     10110111010011                0.010265           0.008684           True
+1          11743     10110111011111                0.010549           0.009734           True
+2          11777     10111000000001                0.009956           0.006424           True
+3          11779     10111000000011                0.010500           0.006647           True
+4          11783     10111000000111                0.010958           0.007349           True
+5          11789     10111000001101                0.010453           0.007410           True
+6          11801     10111000011001                0.011157           0.007510           True
+7          11807     10111000011111                0.010621           0.008290           True
+8          11813     10111000100101                0.010847           0.007318           True
+9          11821     10111000101101                0.011088           0.008171           True
+10         11827     10111000110011                0.010847           0.007890           True
+11         11831     10111000110111                0.011205           0.008648           True
+12         11833     10111000111001                0.010789           0.008402           True
+13         11839     10111000111111                0.011174           0.010095           True
+14         11863     10111001010111                0.011705           0.008427           True
+15         11867     10111001011011                0.012407           0.009122           True
+16         11887     10111001101111                0.011783           0.010035           True
+17         11897     10111001111001                0.010577           0.008745           True
+18         11903     10111001111111                0.010800           0.008854           True
+19         11909     10111010000101                0.010666           0.007541           True
+20         11923     10111010010011                0.010281           0.007662           True
+21         11927     10111010010111                0.010342           0.007977           True
+22         11933     10111010011101                0.010127           0.007896           True
+23         11939     10111010100011                0.010252           0.007570           True
+24         11941     10111010100101                0.011448           0.008023           True
+25         11953     10111010110001                0.011616           0.008007           True
+26         11959     10111010110111                0.012208           0.009508           True
+27         11969     10111011000001                0.013050           0.009227           True
+28         11971     10111011000011                0.014086           0.010089           True
+29         11981     10111011001101                0.011561           0.010651           True
 
 ================================= Curve:  brainpoolP256r1 , samples bit size:  19 =================================
 - Montgomery Ladder Timing -------------------------------------------------------- 
-	standard deviation: 0.0003489965324317902 
-	variance: 1.217985796494136e-07 
-	arithmetic mean: 0.004200676166666758 
-	median: 0.0041807985000001935 
-	maximum: 0.005343134000000305 
-	minimum: 0.0036799760000008064 
+	standard deviation: 0.000314967117635537 
+	variance: 9.920428519163818e-08 
+	arithmetic mean: 0.006785067099999746 
+	median: 0.006734626999996607 
+	maximum: 0.007599298999998894 
+	minimum: 0.0063335160000050905 
 
 - Standard Double-and-add Timing -------------------------------------------------- 
-	standard deviation: 0.00036537150532008327 
-	variance: 1.3349633689986363e-07 
-	arithmetic mean: 0.0031157314666665787 
-	median: 0.0030507130000003713 
-	maximum: 0.003907426999997909 
-	minimum: 0.002371668000002103 
+	standard deviation: 0.000440120717298964 
+	variance: 1.9370624579575457e-07 
+	arithmetic mean: 0.0050208886666657316 
+	median: 0.005015507999999613 
+	maximum: 0.005861729999999454 
+	minimum: 0.004235522999998409 
 
     Multiplicant   Multiplicant (bin)  Montgomery Ladder time  Standard DAA time  Results equal
-0         284059  1000101010110011011                0.004733           0.003492           True
-1         284083  1000101010110110011                0.004607           0.003907           True
-2         284093  1000101010110111101                0.004386           0.003418           True
-3         284111  1000101010111001111                0.004218           0.003283           True
-4         284117  1000101010111010101                0.004492           0.003532           True
-5         284129  1000101010111100001                0.004413           0.003131           True
-6         284131  1000101010111100011                0.004634           0.003715           True
-7         284149  1000101010111110101                0.004289           0.003329           True
-8         284153  1000101010111111001                0.004166           0.003394           True
-9         284159  1000101010111111111                0.004069           0.003380           True
-10        284161  1000101011000000001                0.003972           0.002372           True
-11        284173  1000101011000001101                0.003881           0.002802           True
-12        284191  1000101011000011111                0.004438           0.002956           True
-13        284201  1000101011000101001                0.004409           0.002820           True
-14        284227  1000101011001000011                0.004195           0.002876           True
-15        284231  1000101011001000111                0.004112           0.003038           True
-16        284233  1000101011001001001                0.003951           0.002785           True
-17        284237  1000101011001001101                0.003778           0.002559           True
-18        284243  1000101011001010011                0.003680           0.002756           True
-19        284261  1000101011001100101                0.003922           0.003007           True
-20        284267  1000101011001101011                0.004020           0.003112           True
-21        284269  1000101011001101101                0.003714           0.002841           True
-22        284293  1000101011010000101                0.004303           0.002877           True
-23        284311  1000101011010010111                0.004224           0.003760           True
-24        284341  1000101011010110101                0.005343           0.003064           True
-25        284357  1000101011011000101                0.004066           0.002931           True
-26        284369  1000101011011010001                0.003997           0.002855           True
-27        284377  1000101011011011001                0.003706           0.003168           True
-28        284387  1000101011011100011                0.003951           0.002741           True
-29        284407  1000101011011110111                0.004351           0.003572           True
+0         284059  1000101010110011011                0.007599           0.005599           True
+1         284083  1000101010110110011                0.006894           0.005726           True
+2         284093  1000101010110111101                0.007087           0.005119           True
+3         284111  1000101010111001111                0.006428           0.004890           True
+4         284117  1000101010111010101                0.006334           0.004990           True
+5         284129  1000101010111100001                0.006825           0.004654           True
+6         284131  1000101010111100011                0.006497           0.004711           True
+7         284149  1000101010111110101                0.006370           0.005196           True
+8         284153  1000101010111111001                0.006650           0.005162           True
+9         284159  1000101010111111111                0.006849           0.005244           True
+10        284161  1000101011000000001                0.006474           0.004236           True
+11        284173  1000101011000001101                0.006605           0.004713           True
+12        284191  1000101011000011111                0.006792           0.004774           True
+13        284201  1000101011000101001                0.006520           0.004561           True
+14        284227  1000101011001000011                0.006592           0.004694           True
+15        284231  1000101011001000111                0.006652           0.004566           True
+16        284233  1000101011001001001                0.006369           0.004482           True
+17        284237  1000101011001001101                0.006603           0.004730           True
+18        284243  1000101011001010011                0.007096           0.005041           True
+19        284261  1000101011001100101                0.006943           0.004726           True
+20        284267  1000101011001101011                0.006530           0.005485           True
+21        284269  1000101011001101101                0.006776           0.005754           True
+22        284293  1000101011010000101                0.006694           0.004360           True
+23        284311  1000101011010010111                0.007455           0.005043           True
+24        284341  1000101011010110101                0.006830           0.005494           True
+25        284357  1000101011011000101                0.007067           0.005072           True
+26        284369  1000101011011010001                0.006970           0.004728           True
+27        284377  1000101011011011001                0.006665           0.005210           True
+28        284387  1000101011011100011                0.007068           0.005862           True
+29        284407  1000101011011110111                0.007319           0.005806           True
 
 ================================= Curve:  brainpoolP512r1 , samples bit size:  19 =================================
 - Montgomery Ladder Timing -------------------------------------------------------- 
-	standard deviation: 0.0011936974032216927 
-	variance: 1.4249134904582121e-06 
-	arithmetic mean: 0.010159316333332906 
-	median: 0.009902836499998457 
-	maximum: 0.01291648400000156 
-	minimum: 0.008326344000000319 
+	standard deviation: 0.0015347327211566943 
+	variance: 2.355404525389032e-06 
+	arithmetic mean: 0.014843036999998798 
+	median: 0.014206681500002816 
+	maximum: 0.019360505999998168 
+	minimum: 0.013165112999999451 
 
 - Standard Double-and-add Timing -------------------------------------------------- 
-	standard deviation: 0.0011836561077079612 
-	variance: 1.4010417813143605e-06 
-	arithmetic mean: 0.007258792266666584 
-	median: 0.007119377000000426 
-	maximum: 0.011073487999997411 
-	minimum: 0.004858743999999859 
+	standard deviation: 0.0014658536476877435 
+	variance: 2.1487269164394632e-06 
+	arithmetic mean: 0.01082193733333246 
+	median: 0.010357449500006055 
+	maximum: 0.016420027999998865 
+	minimum: 0.008657729999995922 
 
     Multiplicant   Multiplicant (bin)  Montgomery Ladder time  Standard DAA time  Results equal
-0         284059  1000101010110011011                0.009121           0.007513           True
-1         284083  1000101010110110011                0.008478           0.005865           True
-2         284093  1000101010110111101                0.010549           0.006439           True
-3         284111  1000101010111001111                0.010894           0.007850           True
-4         284117  1000101010111010101                0.009997           0.007771           True
-5         284129  1000101010111100001                0.009210           0.006830           True
-6         284131  1000101010111100011                0.009033           0.006469           True
-7         284149  1000101010111110101                0.010778           0.006634           True
-8         284153  1000101010111111001                0.009083           0.007117           True
-9         284159  1000101010111111111                0.008613           0.006965           True
-10        284161  1000101011000000001                0.009523           0.004859           True
-11        284173  1000101011000001101                0.009299           0.006532           True
-12        284191  1000101011000011111                0.010768           0.007106           True
-13        284201  1000101011000101001                0.009815           0.006187           True
-14        284227  1000101011001000011                0.009231           0.006226           True
-15        284231  1000101011001000111                0.008326           0.006207           True
-16        284233  1000101011001001001                0.008918           0.005656           True
-17        284237  1000101011001001101                0.011385           0.007561           True
-18        284243  1000101011001010011                0.012916           0.008525           True
-19        284261  1000101011001100101                0.011066           0.007541           True
-20        284267  1000101011001101011                0.010575           0.007830           True
-21        284269  1000101011001101101                0.011029           0.008748           True
-22        284293  1000101011010000101                0.009858           0.007782           True
-23        284311  1000101011010010111                0.009623           0.007122           True
-24        284341  1000101011010110101                0.009714           0.007043           True
-25        284357  1000101011011000101                0.009948           0.007239           True
-26        284369  1000101011011010001                0.010967           0.008420           True
-27        284377  1000101011011011001                0.012743           0.007234           True
-28        284387  1000101011011100011                0.012472           0.011073           True
-29        284407  1000101011011110111                0.010845           0.009421           True
+0         284059  1000101010110011011                0.017748           0.012831           True
+1         284083  1000101010110110011                0.019361           0.012606           True
+2         284093  1000101010110111101                0.017115           0.012993           True
+3         284111  1000101010111001111                0.018508           0.016420           True
+4         284117  1000101010111010101                0.014397           0.010718           True
+5         284129  1000101010111100001                0.013920           0.010167           True
+6         284131  1000101010111100011                0.014104           0.010099           True
+7         284149  1000101010111110101                0.014348           0.011076           True
+8         284153  1000101010111111001                0.013973           0.010522           True
+9         284159  1000101010111111111                0.014072           0.012231           True
+10        284161  1000101011000000001                0.013859           0.008658           True
+11        284173  1000101011000001101                0.013920           0.009972           True
+12        284191  1000101011000011111                0.013881           0.010517           True
+13        284201  1000101011000101001                0.014418           0.010284           True
+14        284227  1000101011001000011                0.014305           0.009302           True
+15        284231  1000101011001000111                0.015618           0.009902           True
+16        284233  1000101011001001001                0.016012           0.010260           True
+17        284237  1000101011001001101                0.016873           0.012072           True
+18        284243  1000101011001010011                0.015456           0.011959           True
+19        284261  1000101011001100101                0.014519           0.010260           True
+20        284267  1000101011001101011                0.014364           0.010434           True
+21        284269  1000101011001101101                0.014332           0.010235           True
+22        284293  1000101011010000101                0.013670           0.009653           True
+23        284311  1000101011010010111                0.013850           0.010431           True
+24        284341  1000101011010110101                0.013641           0.010071           True
+25        284357  1000101011011000101                0.014052           0.009990           True
+26        284369  1000101011011010001                0.013165           0.009807           True
+27        284377  1000101011011011001                0.013834           0.010503           True
+28        284387  1000101011011100011                0.013869           0.009715           True
+29        284407  1000101011011110111                0.014108           0.010971           True
 
 ================================= Curve:  brainpoolP256r1 , samples bit size:  24 =================================
 - Montgomery Ladder Timing -------------------------------------------------------- 
-	standard deviation: 0.0009067171557132328 
-	variance: 8.22136000464695e-07 
-	arithmetic mean: 0.00702010836666697 
-	median: 0.006768140500000186 
-	maximum: 0.010577060000002803 
-	minimum: 0.006009702000000061 
+	standard deviation: 0.00084639611939219 
+	variance: 7.163863909221582e-07 
+	arithmetic mean: 0.009032804700000223 
+	median: 0.008743536999997303 
+	maximum: 0.011602218000000164 
+	minimum: 0.00816728400000244 
 
 - Standard Double-and-add Timing -------------------------------------------------- 
-	standard deviation: 0.0006479176987325829 
-	variance: 4.19797344330926e-07 
-	arithmetic mean: 0.0050428123000000845 
-	median: 0.004834940000000287 
-	maximum: 0.006677488000001119 
-	minimum: 0.004312594000001724 
+	standard deviation: 0.0009148482496189037 
+	variance: 8.369473198307719e-07 
+	arithmetic mean: 0.006736056166666534 
+	median: 0.006380538500000199 
+	maximum: 0.00887454799999432 
+	minimum: 0.005548488000002294 
 
     Multiplicant        Multiplicant (bin)  Montgomery Ladder time  Standard DAA time  Results equal
-0       14837491  111000100110011011110011                0.007367           0.004840           True
-1       14837503  111000100110011011111111                0.006125           0.005617           True
-2       14837513  111000100110011100001001                0.007122           0.004337           True
-3       14837519  111000100110011100001111                0.006400           0.004525           True
-4       14837527  111000100110011100010111                0.006010           0.005105           True
-5       14837533  111000100110011100011101                0.006927           0.004827           True
-6       14837539  111000100110011100100011                0.006283           0.004313           True
-7       14837551  111000100110011100101111                0.006094           0.004851           True
-8       14837587  111000100110011101010011                0.006947           0.004830           True
-9       14837591  111000100110011101010111                0.006718           0.004648           True
-10      14837593  111000100110011101011001                0.006471           0.005082           True
-11      14837609  111000100110011101101001                0.007614           0.005351           True
-12      14837653  111000100110011110010101                0.007331           0.004414           True
-13      14837657  111000100110011110011001                0.006290           0.004719           True
-14      14837663  111000100110011110011111                0.007252           0.005880           True
-15      14837677  111000100110011110101101                0.007209           0.005867           True
-16      14837681  111000100110011110110001                0.008103           0.004635           True
-17      14837687  111000100110011110110111                0.010577           0.005659           True
-18      14837707  111000100110011111001011                0.007851           0.006399           True
-19      14837723  111000100110011111011011                0.006818           0.005674           True
-20      14837743  111000100110011111101111                0.006386           0.006128           True
-21      14837789  111000100110100000011101                0.007478           0.004543           True
-22      14837807  111000100110100000101111                0.006704           0.004568           True
-23      14837839  111000100110100001001111                0.008599           0.005140           True
-24      14837857  111000100110100001100001                0.006413           0.006677           True
-25      14837861  111000100110100001100101                0.006708           0.004934           True
-26      14837873  111000100110100001110001                0.006641           0.004367           True
-27      14837891  111000100110100010000011                0.006257           0.004575           True
-28      14837897  111000100110100010001001                0.007447           0.004426           True
-29      14837899  111000100110100010001011                0.006462           0.004353           True
+0       14837491  111000100110011011110011                0.008955           0.007599           True
+1       14837503  111000100110011011111111                0.009180           0.008657           True
+2       14837513  111000100110011100001001                0.009699           0.008875           True
+3       14837519  111000100110011100001111                0.010875           0.008696           True
+4       14837527  111000100110011100010111                0.011602           0.008000           True
+5       14837533  111000100110011100011101                0.010298           0.008125           True
+6       14837539  111000100110011100100011                0.009153           0.006853           True
+7       14837551  111000100110011100101111                0.008783           0.006634           True
+8       14837587  111000100110011101010011                0.008364           0.006155           True
+9       14837591  111000100110011101010111                0.008167           0.006218           True
+10      14837593  111000100110011101011001                0.008413           0.006358           True
+11      14837609  111000100110011101101001                0.008285           0.006178           True
+12      14837653  111000100110011110010101                0.008622           0.006123           True
+13      14837657  111000100110011110011001                0.008891           0.006329           True
+14      14837663  111000100110011110011111                0.008557           0.006501           True
+15      14837677  111000100110011110101101                0.008788           0.006348           True
+16      14837681  111000100110011110110001                0.008365           0.006086           True
+17      14837687  111000100110011110110111                0.009899           0.006403           True
+18      14837707  111000100110011111001011                0.008416           0.007052           True
+19      14837723  111000100110011111011011                0.008345           0.006562           True
+20      14837743  111000100110011111101111                0.008287           0.007424           True
+21      14837789  111000100110100000011101                0.008330           0.005974           True
+22      14837807  111000100110100000101111                0.008315           0.006007           True
+23      14837839  111000100110100001001111                0.008705           0.005775           True
+24      14837857  111000100110100001100001                0.008386           0.005548           True
+25      14837861  111000100110100001100101                0.008423           0.005587           True
+26      14837873  111000100110100001110001                0.009276           0.005926           True
+27      14837891  111000100110100010000011                0.010014           0.006284           True
+28      14837897  111000100110100010001001                0.009673           0.006705           True
+29      14837899  111000100110100010001011                0.009919           0.007100           True
 
 ================================= Curve:  brainpoolP512r1 , samples bit size:  24 =================================
 - Montgomery Ladder Timing -------------------------------------------------------- 
-	standard deviation: 0.0014445520996749035 
-	variance: 2.086730768675172e-06 
-	arithmetic mean: 0.01361758036666636 
-	median: 0.013312727500000676 
-	maximum: 0.01944433799999956 
-	minimum: 0.011594160999997882 
+	standard deviation: 0.0027253905156750594 
+	variance: 7.427753462931566e-06 
+	arithmetic mean: 0.019334427799999315 
+	median: 0.018336880999996197 
+	maximum: 0.03005349999999396 
+	minimum: 0.017872714999995765 
 
 - Standard Double-and-add Timing -------------------------------------------------- 
-	standard deviation: 0.001166789624103219 
-	variance: 1.3613980269149314e-06 
-	arithmetic mean: 0.01020038459999988 
-	median: 0.009976953499998942 
-	maximum: 0.012516001999998139 
-	minimum: 0.008464255999999892 
+	standard deviation: 0.0018244703527386312 
+	variance: 3.3286920680222253e-06 
+	arithmetic mean: 0.014076661933332938 
+	median: 0.013845650500002193 
+	maximum: 0.02169620600000144 
+	minimum: 0.012234827999996867 
 
     Multiplicant        Multiplicant (bin)  Montgomery Ladder time  Standard DAA time  Results equal
-0       14837491  111000100110011011110011                0.014235           0.012231           True
-1       14837503  111000100110011011111111                0.019444           0.011587           True
-2       14837513  111000100110011100001001                0.014699           0.012516           True
-3       14837519  111000100110011100001111                0.015443           0.012206           True
-4       14837527  111000100110011100010111                0.015123           0.010097           True
-5       14837533  111000100110011100011101                0.014323           0.012081           True
-6       14837539  111000100110011100100011                0.014086           0.010056           True
-7       14837551  111000100110011100101111                0.015293           0.010977           True
-8       14837587  111000100110011101010011                0.013302           0.011885           True
-9       14837591  111000100110011101010111                0.013855           0.009803           True
-10      14837593  111000100110011101011001                0.013102           0.010269           True
-11      14837609  111000100110011101101001                0.013872           0.009741           True
-12      14837653  111000100110011110010101                0.013323           0.010579           True
-13      14837657  111000100110011110011001                0.013637           0.011270           True
-14      14837663  111000100110011110011111                0.013437           0.010161           True
-15      14837677  111000100110011110101101                0.012154           0.009605           True
-16      14837681  111000100110011110110001                0.012996           0.009267           True
-17      14837687  111000100110011110110111                0.012290           0.009898           True
-18      14837707  111000100110011111001011                0.011594           0.008995           True
-19      14837723  111000100110011111011011                0.012525           0.010894           True
-20      14837743  111000100110011111101111                0.012514           0.009873           True
-21      14837789  111000100110100000011101                0.012352           0.008667           True
-22      14837807  111000100110100000101111                0.012660           0.008705           True
-23      14837839  111000100110100001001111                0.013037           0.010307           True
-24      14837857  111000100110100001100001                0.012006           0.008464           True
-25      14837861  111000100110100001100101                0.012867           0.008711           True
-26      14837873  111000100110100001110001                0.013295           0.009532           True
-27      14837891  111000100110100010000011                0.013238           0.008879           True
-28      14837897  111000100110100010001001                0.014180           0.009346           True
-29      14837899  111000100110100010001011                0.013645           0.009409           True
+0       14837491  111000100110011011110011                0.020438           0.018391           True
+1       14837503  111000100110011011111111                0.018371           0.015647           True
+2       14837513  111000100110011100001001                0.018250           0.013165           True
+3       14837519  111000100110011100001111                0.018264           0.013903           True
+4       14837527  111000100110011100010111                0.018322           0.013869           True
+5       14837533  111000100110011100011101                0.018295           0.013823           True
+6       14837539  111000100110011100100011                0.018826           0.013965           True
+7       14837551  111000100110011100101111                0.018096           0.013789           True
+8       14837587  111000100110011101010011                0.021999           0.014157           True
+9       14837591  111000100110011101010111                0.019804           0.014383           True
+10      14837593  111000100110011101011001                0.027936           0.021696           True
+11      14837609  111000100110011101101001                0.019070           0.014330           True
+12      14837653  111000100110011110010101                0.018418           0.013691           True
+13      14837657  111000100110011110011001                0.018256           0.013661           True
+14      14837663  111000100110011110011111                0.018300           0.014073           True
+15      14837677  111000100110011110101101                0.017873           0.013546           True
+16      14837681  111000100110011110110001                0.017882           0.013222           True
+17      14837687  111000100110011110110111                0.017940           0.013931           True
+18      14837707  111000100110011111001011                0.018072           0.013575           True
+19      14837723  111000100110011111011011                0.018310           0.014256           True
+20      14837743  111000100110011111101111                0.018674           0.014695           True
+21      14837789  111000100110100000011101                0.019338           0.012803           True
+22      14837807  111000100110100000101111                0.030053           0.014758           True
+23      14837839  111000100110100001001111                0.019105           0.013989           True
+24      14837857  111000100110100001100001                0.018214           0.012290           True
+25      14837861  111000100110100001100101                0.018338           0.012569           True
+26      14837873  111000100110100001110001                0.018564           0.012435           True
+27      14837891  111000100110100010000011                0.018336           0.012235           True
+28      14837897  111000100110100010001001                0.018320           0.012420           True
+29      14837899  111000100110100010001011                0.018371           0.013034           True
 
 </pre>
 </div>
@@ -15379,36 +15382,337 @@ Difference (slow - fast):  10.334392342000001 s
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="References-">References <a id="references" /><a class="anchor-link" href="#References-">&#182;</a></h1><ul>
-<li><p><a href="https://perso.univ-rennes1.fr/christophe.ritzenthaler/cours/elliptic-curve-course.pdf">[1]</a>: Ritzenhaler C., "Introduction to elliptic curves", Université de Rennes, 2013-2014, online access: <a href="https://perso.univ-rennes1.fr/christophe.ritzenthaler/cours/elliptic-curve-course.pdf">https://perso.univ-rennes1.fr/christophe.ritzenthaler/cours/elliptic-curve-course.pdf</a></p>
-</li>
-<li><p><a href="https://cryptobook.nakov.com/asymmetric-key-ciphers/elliptic-curve-cryptography-ecc">https://cryptobook.nakov.com/asymmetric-key-ciphers/elliptic-curve-cryptography-ecc</a></p>
-</li>
-<li><p>[3] <a href="https://csrc.nist.gov/csrc/media/events/workshop-on-elliptic-curve-cryptography-standards/documents/papers/session4-merkle-johannes.pdf">https://csrc.nist.gov/csrc/media/events/workshop-on-elliptic-curve-cryptography-standards/documents/papers/session4-merkle-johannes.pdf</a> - Requirements for Elliptic Curves for High-Assurance Applications, chapter 3.5 Implementation Security</p>
-</li>
-<li><p>[4] <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Ar2.pdf">https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Ar2.pdf</a></p>
-</li>
-<li>[5] <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-186-draft.pdf">https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-186-draft.pdf</a> page 9</li>
-<li><p>[6] <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf</a> Appendix D: Recommended Elliptic Curves for Federal
-Government Use, p. 87</p>
-</li>
-<li><p>[7] <a href="https://www.python.org/dev/peps/pep-0557/">https://www.python.org/dev/peps/pep-0557/</a> dataclasses</p>
-</li>
-<li><p>[8] <a href="https://www.rfc-editor.org/rfc/pdfrfc/rfc5639.txt.pdf">https://www.rfc-editor.org/rfc/pdfrfc/rfc5639.txt.pdf</a> -&gt; Elliptic Curve Cryptography (ECC) Brainpool Standard Curves and Curve Generation, chapter 3 Domain Parameter Specification</p>
-</li>
-<li><p>? <a href="https://www.rfc-editor.org/rfc/rfc8734.html#section-appendix.a-1">https://www.rfc-editor.org/rfc/rfc8734.html#section-appendix.a-1</a> brainpool test vectors for later</p>
-</li>
-<li><p><a href="https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/TechGuidelines/TR03111/BSI-TR-03111_V-2-1_pdf.pdf?__blob=publicationFile&amp;v=1">https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/TechGuidelines/TR03111/BSI-TR-03111_V-2-1_pdf.pdf?__blob=publicationFile&amp;v=1</a></p>
-</li>
-<li><p>[9] <a href="https://www.emsec.ruhr-uni-bochum.de/media/attachments/files/2014/11/MA_Bluhm.pdf">https://www.emsec.ruhr-uni-bochum.de/media/attachments/files/2014/11/MA_Bluhm.pdf</a> Software optimization of binary elliptic curves arithmetic
-using modern processor architectures, p. 14</p>
-</li>
-<li><p>[10] <a href="https://eprint.iacr.org/2014/140.pdf">https://eprint.iacr.org/2014/140.pdf</a> Recovering OpenSSL ECDSA Nonces Using the FLUSH+RELOAD Cache Side-channel Attack</p>
-</li>
-</ul>
-<p><a href="https://billatnapier.medium.com/barebones-p256-1700ff5a4">https://billatnapier.medium.com/barebones-p256-1700ff5a4</a></p>
-<p><a href="https://girlstalkmath.com/2018/07/02/elliptic-curve-cryptography-2/">https://girlstalkmath.com/2018/07/02/elliptic-curve-cryptography-2/</a> multiplicative inverse in mod arithmetic</p>
-<p>my ascii charts <a href="https://asciiflow.com/#/share/eJyrVspLzE1VssorzcnRUcpJrEwtUrJSqo5RqohRsrI0NdaJUaoEsowszYGsktSKEiAnRunRlD1DGsXE5AFJBYoAbY1xJKDNiThjCDvv0ZQmOhlFIFamEYgzFGN7Hk1pwIlAJuGWnTIBq9OApHNGfn5xqoJjfEFRZhmGjyG%2Bg6pxQqhpItmnhBCKpVPw%2BmUNXtkZtIxPwj4hFKOoviUQqYTjFRG7aM4Eme6cn1tQWgKO3NIkdP9DPQpT44SkpgnTOIgRttB0ohUQn5QITBGoxjlB1TihqcFiHFUQsemFYJJBJByalShUKgTwJhjSiwCIx1wrkjMS89Lh6YTYGJi2C0mvE0wvlqIBFn6JeSnI6Wx6CwkRDdLriJZGSQlkEsof%2FAlqAEsffF4kJRHhTkVkJCGor2DliDdWn0LrETQ12OIQotXbFlrQQJILVuO8baEFjSNUDS7jKE8QxBQxpCcHUsEgNWZIoxilWqVaACONwUA%3D">https://asciiflow.com/#/share/eJyrVspLzE1VssorzcnRUcpJrEwtUrJSqo5RqohRsrI0NdaJUaoEsowszYGsktSKEiAnRunRlD1DGsXE5AFJBYoAbY1xJKDNiThjCDvv0ZQmOhlFIFamEYgzFGN7Hk1pwIlAJuGWnTIBq9OApHNGfn5xqoJjfEFRZhmGjyG%2Bg6pxQqhpItmnhBCKpVPw%2BmUNXtkZtIxPwj4hFKOoviUQqYTjFRG7aM4Eme6cn1tQWgKO3NIkdP9DPQpT44SkpgnTOIgRttB0ohUQn5QITBGoxjlB1TihqcFiHFUQsemFYJJBJByalShUKgTwJhjSiwCIx1wrkjMS89Lh6YTYGJi2C0mvE0wvlqIBFn6JeSnI6Wx6CwkRDdLriJZGSQlkEsof%2FAlqAEsffF4kJRHhTkVkJCGor2DliDdWn0LrETQ12OIQotXbFlrQQJILVuO8baEFjSNUDS7jKE8QxBQxpCcHUsEgNWZIoxilWqVaACONwUA%3D</a>)</p>
+<h3 id="4.5-ECDH:-Implementation-of-key-manager-model">4.5 ECDH: Implementation of key manager model<a class="anchor-link" href="#4.5-ECDH:-Implementation-of-key-manager-model">&#182;</a></h3><p>A simple key management model was implemented as a dataclass which holds an id of the user, the owner's public-private key pair and a list of shared keys (object consisting of an id of another user and calculated with )</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[38]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">KeyPair</span><span class="p">:</span>
+    <span class="n">public</span><span class="p">:</span> <span class="n">Point</span> 
+    <span class="n">private</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">SharedKey</span><span class="p">:</span>
+    <span class="n">key</span><span class="p">:</span> <span class="n">Point</span> 
+    <span class="n">sharedWith</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;shared with: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sharedWith</span><span class="si">}</span><span class="s1">, key: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">KeyManager</span><span class="p">:</span>
+    <span class="n">ownKeys</span><span class="p">:</span> <span class="n">KeyPair</span> 
+    <span class="n">shared</span><span class="p">:</span> <span class="nb">list</span> <span class="c1"># list of shared keys</span>
+    <span class="n">size</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;--- KEY MANAGER ---</span><span class="se">\n</span><span class="s1">owner: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">keys size: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">public key: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ownKeys</span><span class="o">.</span><span class="n">public</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">private: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ownKeys</span><span class="o">.</span><span class="n">private</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">shared keys: </span><span class="se">\n</span><span class="si">{</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;  # &quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">sh</span><span class="p">)])</span> <span class="k">for</span> <span class="n">sh</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared</span><span class="p">])</span><span class="si">}</span><span class="s1">&#39;</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[39]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ECDH helper functions algorithm </span>
+<span class="kn">import</span> <span class="nn">secrets</span>
+
+<span class="c1">#def generateKeyPair(curve: EllipticCurve) -&gt; KeyPair:</span>
+<span class="c1">#    priv = secrets.randbelow(curve.field.p) # large random number below prime modulus of the field</span>
+<span class="c1">#    pub = pointMultiplication(curve, toBinary(priv))</span>
+<span class="c1">#    return KeyPair(public=pub, private=priv)</span>
+
+
+<span class="c1">#def getCurveForKeySize(size: int): </span>
+<span class="c1">#    if (size == 256): </span>
+<span class="c1">#        curve = getCurve(ELLIPTIC_CURVES.bp256.value)</span>
+<span class="c1">#    elif (size == 512): </span>
+<span class="c1">#        curve = getCurve(ELLIPTIC_CURVES.bp512.value)</span>
+<span class="c1">#    else: </span>
+<span class="c1">#        raise ValueError(&#39;Invalid key size; pick 256 or 512.&#39;)</span>
+
+<span class="n">generatePrivateKey</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">EllipticCurve</span><span class="p">],</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">ec</span><span class="p">:</span> <span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="n">ec</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">p</span><span class="p">)</span>
+
+<span class="n">generatePublicKeyFromPrivate</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">EllipticCurve</span><span class="p">,</span> <span class="n">Point</span><span class="p">],</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">ec</span><span class="p">,</span> <span class="n">priv</span><span class="p">:</span> <span class="n">pointMultiplication</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="n">toBinary</span><span class="p">(</span><span class="n">priv</span><span class="p">))</span>
+
+<span class="n">generateKeyPair</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">EllipticCurve</span><span class="p">],</span> <span class="n">KeyPair</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">ec</span><span class="p">:</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">priv</span><span class="o">=</span><span class="n">generatePrivateKey</span><span class="p">(</span><span class="n">ec</span><span class="p">):</span> \
+    <span class="n">KeyPair</span><span class="p">(</span><span class="n">public</span><span class="o">=</span><span class="n">pointMultiplication</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="n">toBinary</span><span class="p">(</span><span class="n">priv</span><span class="p">)),</span> <span class="n">private</span><span class="o">=</span><span class="n">priv</span><span class="p">))()</span>
+
+<span class="n">getCurveForKeySize</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="n">EllipticCurve</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">size</span><span class="p">:</span> \
+    <span class="n">getCurve</span><span class="p">(</span><span class="n">ELLIPTIC_CURVES</span><span class="o">.</span><span class="n">bp256</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">size</span> <span class="o">==</span> <span class="mi">256</span> <span class="k">else</span> \
+        <span class="n">getCurve</span><span class="p">(</span><span class="n">ELLIPTIC_CURVES</span><span class="o">.</span><span class="n">bp512</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">size</span> <span class="o">==</span> <span class="mi">512</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="n">getSharedKey</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">EllipticCurve</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">Point</span><span class="p">,</span> <span class="nb">id</span><span class="p">],</span> <span class="n">SharedKey</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">ec</span><span class="p">,</span> <span class="n">a_priv</span><span class="p">,</span> <span class="n">b_pub</span><span class="p">,</span> <span class="n">b_id</span><span class="p">:</span> \
+    <span class="n">SharedKey</span><span class="p">(</span><span class="n">anyPointsMultiplication</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="n">b_pub</span><span class="p">,</span> <span class="n">toBinary</span><span class="p">(</span><span class="n">a_priv</span><span class="p">)),</span> <span class="n">b_id</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[40]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">EcdhReturn</span><span class="p">:</span>
+    <span class="n">a</span><span class="p">:</span> <span class="n">KeyManager</span> 
+    <span class="n">b</span><span class="p">:</span> <span class="n">KeyManager</span>
+<span class="c1"># function to generate two key pairs and calculate the shared key between them</span>
+<span class="c1"># the shared key is calculated twice in order to verify that the results are equal.</span>
+<span class="k">def</span> <span class="nf">ecdhWithKeyGen</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">aId</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">bId</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EcdhReturn</span><span class="p">:</span>
+    <span class="n">curve</span> <span class="o">=</span> <span class="n">getCurveForKeySize</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">curve</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid key size; pick 256 or 512.&#39;</span><span class="p">)</span>
+    <span class="n">keysA</span> <span class="o">=</span> <span class="n">generateKeyPair</span><span class="p">(</span><span class="n">curve</span><span class="p">)</span>
+    <span class="n">keysB</span> <span class="o">=</span> <span class="n">generateKeyPair</span><span class="p">(</span><span class="n">curve</span><span class="p">)</span>
+
+    <span class="n">sharedForA</span> <span class="o">=</span> <span class="n">SharedKey</span><span class="p">(</span><span class="n">anyPointsMultiplication</span><span class="p">(</span><span class="n">curve</span><span class="p">,</span> <span class="n">keysB</span><span class="o">.</span><span class="n">public</span><span class="p">,</span> <span class="n">toBinary</span><span class="p">(</span><span class="n">keysA</span><span class="o">.</span><span class="n">private</span><span class="p">)),</span> <span class="n">bId</span><span class="p">)</span>
+    <span class="n">sharedForB</span> <span class="o">=</span> <span class="n">SharedKey</span><span class="p">(</span><span class="n">anyPointsMultiplication</span><span class="p">(</span><span class="n">curve</span><span class="p">,</span> <span class="n">keysA</span><span class="o">.</span><span class="n">public</span><span class="p">,</span> <span class="n">toBinary</span><span class="p">(</span><span class="n">keysB</span><span class="o">.</span><span class="n">private</span><span class="p">)),</span> <span class="n">aId</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">EcdhReturn</span><span class="p">(</span>
+        <span class="n">a</span><span class="o">=</span><span class="n">KeyManager</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">aId</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">ownKeys</span><span class="o">=</span><span class="n">keysA</span><span class="p">,</span> <span class="n">shared</span><span class="o">=</span><span class="p">[</span><span class="n">sharedForA</span><span class="p">]),</span> 
+        <span class="n">b</span><span class="o">=</span><span class="n">KeyManager</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">bId</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">ownKeys</span><span class="o">=</span><span class="n">keysB</span><span class="p">,</span> <span class="n">shared</span><span class="o">=</span><span class="p">[</span><span class="n">sharedForB</span><span class="p">])</span>
+    <span class="p">)</span>
+
+<span class="c1"># check</span>
+
+<span class="n">a_id</span> <span class="o">=</span> <span class="s1">&#39;a-key-1&#39;</span>
+<span class="n">b_id</span> <span class="o">=</span> <span class="s1">&#39;b-key-1&#39;</span>
+
+<span class="n">keys</span> <span class="o">=</span> <span class="n">ecdhWithKeyGen</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">a_id</span><span class="p">,</span> <span class="n">b_id</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">keys</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">keys</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>--- KEY MANAGER ---
+owner: a-key-1 
+keys size: 256 
+public key: Point(x=30147845480387316664590173668972599713641593001161892243164578955697811163956, y=18579093336557627948350120480783910023670728942758285303145369911438274298304) 
+private: 53360736277887011372413080047871898999252547535204416264842619042661055031748 
+shared keys: 
+  # shared with: b-key-1, key: Point(x=23630928561925000830874140666100411425468257714100350776123327485697861860049, y=29390823033769028004872656780348228363242438282190853669498797171026299961170)
+
+--- KEY MANAGER ---
+owner: b-key-1 
+keys size: 256 
+public key: Point(x=70517931307624186814125767378483331378282109296193646495459520518596538595182, y=15469011552379737556583258967269706297482650692187077345872026342494344553855) 
+private: 49757647874544693904937988996843043236537964401698010887024841177116351918467 
+shared keys: 
+  # shared with: a-key-1, key: Point(x=23630928561925000830874140666100411425468257714100350776123327485697861860049, y=29390823033769028004872656780348228363242438282190853669498797171026299961170)
+
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="ECDH:-Brainpool-Test-Vectors">ECDH: Brainpool Test Vectors<a class="anchor-link" href="#ECDH:-Brainpool-Test-Vectors">&#182;</a></h3><p>The data of oficially published <a href="#references">[11]</a> test vectors of Brainpool curves was collected for keys with length of 256 and 512 bit. Followingly, the functions to compute the public key from the private one, as well as the shared key calculation were tested.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[44]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">BrainpoolTestVector</span><span class="p">():</span> 
+    <span class="n">a</span><span class="p">:</span> <span class="n">KeyPair</span>
+    <span class="n">b</span><span class="p">:</span> <span class="n">KeyPair</span>
+    <span class="n">sh</span><span class="p">:</span> <span class="n">SharedKey</span>
+    
+<span class="k">def</span> <span class="nf">getBrainpoolTestVector</span><span class="p">(</span><span class="n">a_priv</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">a_x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">a_y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b_priv</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b_x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b_y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">sh_x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">sh_y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BrainpoolTestVector</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">BrainpoolTestVector</span><span class="p">(</span>
+        <span class="n">a</span><span class="o">=</span><span class="n">KeyPair</span><span class="p">(</span>
+            <span class="n">public</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">a_x</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">a_y</span>
+            <span class="p">),</span>
+            <span class="n">private</span><span class="o">=</span><span class="n">a_priv</span>
+        <span class="p">),</span>
+        <span class="n">b</span><span class="o">=</span><span class="n">KeyPair</span><span class="p">(</span>
+            <span class="n">public</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">b_x</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">b_y</span>
+            <span class="p">),</span>
+            <span class="n">private</span><span class="o">=</span><span class="n">b_priv</span>
+        <span class="p">),</span>
+        <span class="n">sh</span><span class="o">=</span><span class="n">SharedKey</span><span class="p">(</span>
+            <span class="n">key</span><span class="o">=</span><span class="n">Point</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">sh_x</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">sh_y</span>
+            <span class="p">),</span>
+            <span class="n">sharedWith</span><span class="o">=</span><span class="s1">&#39;test-vector&#39;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+
+<span class="n">bp256_testVector</span> <span class="o">=</span> <span class="n">getBrainpoolTestVector</span><span class="p">(</span>
+    <span class="n">a_x</span><span class="o">=</span><span class="mh">0x78028496B5ECAAB3C8B6C12E45DB1E02C9E4D26B4113BC4F015F60C5CCC0D206</span><span class="p">,</span>
+    <span class="n">a_y</span><span class="o">=</span><span class="mh">0xA2AE1762A3831C1D20F03F8D1E3C0C39AFE6F09B4D44BBE80CD100987B05F92B</span><span class="p">,</span>
+    <span class="n">a_priv</span><span class="o">=</span><span class="mh">0x041EB8B1E2BC681BCE8E39963B2E9FC415B05283313DD1A8BCC055F11AE49699</span><span class="p">,</span> 
+    <span class="n">b_x</span><span class="o">=</span><span class="mh">0x8E07E219BA588916C5B06AA30A2F464C2F2ACFC1610A3BE2FB240B635341F0DB</span><span class="p">,</span>
+    <span class="n">b_y</span><span class="o">=</span><span class="mh">0x148EA1D7D1E7E54B9555B6C9AC90629C18B63BEE5D7AA6949EBBF47B24FDE40D</span><span class="p">,</span>
+    <span class="n">b_priv</span><span class="o">=</span><span class="mh">0x06F5240EACDB9837BC96D48274C8AA834B6C87BA9CC3EEDD81F99A16B8D804D3</span><span class="p">,</span>    
+    <span class="n">sh_x</span><span class="o">=</span><span class="mh">0x05E940915549E9F6A4A75693716E37466ABA79B4BF2919877A16DD2CC2E23708</span><span class="p">,</span>
+    <span class="n">sh_y</span><span class="o">=</span><span class="mh">0x6BC23B6702BC5A019438CEEA107DAAD8B94232FFBBC350F3B137628FE6FD134C</span>
+<span class="p">)</span>
+
+<span class="n">bp512_testVector</span> <span class="o">=</span> <span class="n">getBrainpoolTestVector</span><span class="p">(</span>
+    <span class="n">a_x</span><span class="o">=</span><span class="mh">0x0A420517E406AAC0ACDCE90FCD71487718D3B953EFD7FBEC5F7F27E28C6149999397E91E029E06457DB2D3E640668B392C2A7E737A7F0BF04436D11640FD09FD</span><span class="p">,</span>
+    <span class="n">a_y</span><span class="o">=</span><span class="mh">0x72E6882E8DB28AAD36237CD25D580DB23783961C8DC52DFA2EC138AD472A0FCEF3887CF62B623B2A87DE5C588301EA3E5FC269B373B60724F5E82A6AD147FDE7</span><span class="p">,</span>
+    <span class="n">a_priv</span><span class="o">=</span><span class="mh">0x16302FF0DBBB5A8D733DAB7141C1B45ACBC8715939677F6A56850A38BD87BD59B09E80279609FF333EB9D4C061231FB26F92EEB04982A5F1D1764CAD57665422</span><span class="p">,</span>
+    <span class="n">b_x</span><span class="o">=</span><span class="mh">0x9D45F66DE5D67E2E6DB6E93A59CE0BB48106097FF78A081DE781CDB31FCE8CCBAAEA8DD4320C4119F1E9CD437A2EAB3731FA9668AB268D871DEDA55A5473199F</span><span class="p">,</span>
+    <span class="n">b_y</span><span class="o">=</span><span class="mh">0x2FDC313095BCDD5FB3A91636F07A959C8E86B5636A1E930E8396049CB481961D365CC11453A06C719835475B12CB52FC3C383BCE35E27EF194512B71876285FA</span><span class="p">,</span>
+    <span class="n">b_priv</span><span class="o">=</span><span class="mh">0x230E18E1BCC88A362FA54E4EA3902009292F7F8033624FD471B5D8ACE49D12CFABBC19963DAB8E2F1EBA00BFFB29E4D72D13F2224562F405CB80503666B25429</span><span class="p">,</span>   
+    <span class="n">sh_x</span><span class="o">=</span><span class="mh">0xA7927098655F1F9976FA50A9D566865DC530331846381C87256BAF3226244B76D36403C024D7BBF0AA0803EAFF405D3D24F11A9B5C0BEF679FE1454B21C4CD1F</span><span class="p">,</span>
+    <span class="n">sh_y</span><span class="o">=</span><span class="mh">0x7DB71C3DEF63212841C463E881BDCF055523BD368240E6C3143BD8DEF8B3B3223B95E0F53082FF5E412F4222537A43DF1C6D25729DDB51620A832BE6A26680A2</span>
+<span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[48]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="k">class</span> <span class="nc">TestEcdh</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">testPublicKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">bp256</span> <span class="o">=</span> <span class="n">getCurve</span><span class="p">(</span><span class="n">ELLIPTIC_CURVES</span><span class="o">.</span><span class="n">bp256</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">bp512</span> <span class="o">=</span> <span class="n">getCurve</span><span class="p">(</span><span class="n">ELLIPTIC_CURVES</span><span class="o">.</span><span class="n">bp512</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="n">keyA_256</span> <span class="o">=</span> <span class="n">generatePublicKeyFromPrivate</span><span class="p">(</span><span class="n">bp256</span><span class="p">,</span> <span class="n">bp256_testVector</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">private</span><span class="p">)</span>
+        <span class="n">keyA_512</span> <span class="o">=</span> <span class="n">generatePublicKeyFromPrivate</span><span class="p">(</span><span class="n">bp512</span><span class="p">,</span> <span class="n">bp512_testVector</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">private</span><span class="p">)</span>
+
+        <span class="n">keyB_256</span> <span class="o">=</span> <span class="n">generatePublicKeyFromPrivate</span><span class="p">(</span><span class="n">bp256</span><span class="p">,</span> <span class="n">bp256_testVector</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">private</span><span class="p">)</span>
+        <span class="n">keyB_512</span> <span class="o">=</span> <span class="n">generatePublicKeyFromPrivate</span><span class="p">(</span><span class="n">bp512</span><span class="p">,</span> <span class="n">bp512_testVector</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">private</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">keyA_256</span><span class="p">,</span> <span class="n">bp256_testVector</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">public</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">keyA_512</span><span class="p">,</span> <span class="n">bp512_testVector</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">public</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">keyB_256</span><span class="p">,</span> <span class="n">bp256_testVector</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">public</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">keyB_512</span><span class="p">,</span> <span class="n">bp512_testVector</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">public</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">testSharedKey</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">bp256</span> <span class="o">=</span> <span class="n">getCurve</span><span class="p">(</span><span class="n">ELLIPTIC_CURVES</span><span class="o">.</span><span class="n">bp256</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">bp512</span> <span class="o">=</span> <span class="n">getCurve</span><span class="p">(</span><span class="n">ELLIPTIC_CURVES</span><span class="o">.</span><span class="n">bp512</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">sharedKey256</span> <span class="o">=</span> <span class="n">getSharedKey</span><span class="p">(</span><span class="n">bp256</span><span class="p">,</span> <span class="n">bp256_testVector</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">private</span><span class="p">,</span> <span class="n">bp256_testVector</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">public</span><span class="p">,</span> <span class="s1">&#39;test-vector&#39;</span><span class="p">)</span>
+        <span class="n">sharedKey512</span> <span class="o">=</span> <span class="n">getSharedKey</span><span class="p">(</span><span class="n">bp512</span><span class="p">,</span> <span class="n">bp512_testVector</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">private</span><span class="p">,</span> <span class="n">bp512_testVector</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">public</span><span class="p">,</span> <span class="s1">&#39;test-vector&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">sharedKey256</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">bp256_testVector</span><span class="o">.</span><span class="n">sh</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">sharedKey512</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">bp512_testVector</span><span class="o">.</span><span class="n">sh</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+        
+
+<span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">],</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">exit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>testPublicKeys (__main__.TestEcdh) ... ok
+testSharedKey (__main__.TestEcdh) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.503s
+
+OK
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[48]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&lt;unittest.main.TestProgram at 0x7f7937461460&gt;</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="References-">References <a id="references" /><a class="anchor-link" href="#References-">&#182;</a></h2><p><code>[1]</code> Ritzenhaler C., <em>Introduction to elliptic curves</em>, Université de Rennes, 2013-2014, online access: <a href="https://perso.univ-rennes1.fr/christophe.ritzenthaler/cours/elliptic-curve-course.pdf">https://perso.univ-rennes1.fr/christophe.ritzenthaler/cours/elliptic-curve-course.pdf</a></p>
+<p><code>[2]</code> Svetlin Nakov, PhD, <em>Practical cryptography for developers: Elliptic Curve Cryptography (ECC)</em>, online-access: <a href="https://cryptobook.nakov.com/asymmetric-key-ciphers/elliptic-curve-cryptography-ecc">https://cryptobook.nakov.com/asymmetric-key-ciphers/elliptic-curve-cryptography-ecc</a></p>
+<p><code>[3]</code> Lochter M., Merkle J., Schmidt J.M., Schuetze T., <em>Requirements for Elliptic Curves for High-Assurance Applications</em>, chapter <em>3.5 Implementation Security</em>, online-access: <a href="https://csrc.nist.gov/csrc/media/events/workshop-on-elliptic-curve-cryptography-standards/documents/papers/session4-merkle-johannes.pdf">https://csrc.nist.gov/csrc/media/events/workshop-on-elliptic-curve-cryptography-standards/documents/papers/session4-merkle-johannes.pdf</a></p>
+<p><code>[4]</code> Barker E., Chen L., Roginsky A., Smid M., <em>Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography</em> NIST Special Publication 800-56A Revision 2, 2013, online-access: <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Ar2.pdf">https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Ar2.pdf</a></p>
+<p><code>[5]</code> Chen L., Moody D., Regenschied A., Randall K., <em>Recommendations for Discrete Logarithm-Based Cryptography: Elliptic Curve Domain Parameters</em>, p. 9, 2019, online-access: <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-186-draft.pdf">https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-186-draft.pdf</a></p>
+<p><code>[6]</code> Federal Information Processing Standards Publication, <em>Digital Signature Standard (DSS)</em>, FIPS PUB 186-4, <em>Appendix D: Recommended Elliptic Curves for Federal Government Use</em>, p. 87, online-access: <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf</a></p>
+<p><code>[7]</code> PEP-557, <em>Data classes</em>, online-access: <a href="https://www.python.org/dev/peps/pep-0557/">https://www.python.org/dev/peps/pep-0557/</a></p>
+<p><code>[8]</code> Lochter M., Merkle J., <em>Elliptic Curve Cryptography (ECC) Brainpool Standard Curves and Curve Generation</em>, chapter <em>3 Domain Parameter Specification</em>, 2010, IETF Trust, online-access: <a href="https://www.rfc-editor.org/rfc/pdfrfc/rfc5639.txt.pdf">https://www.rfc-editor.org/rfc/pdfrfc/rfc5639.txt.pdf</a></p>
+<p><code>[9]</code> Gueron Sh., Paar Ch., <em>Software optimization of binary elliptic curves arithmetic
+using modern processor architectures</em>, 2013, Ruhr University Bochum, p. 14, online-access: <a href="https://www.emsec.ruhr-uni-bochum.de/media/attachments/files/2014/11/MA_Bluhm.pdf">https://www.emsec.ruhr-uni-bochum.de/media/attachments/files/2014/11/MA_Bluhm.pdf</a></p>
+<p><code>[10]</code> Yarom Y., Benger N., <em>Recovering OpenSSL ECDSA Nonces Using the FLUSH+RELOAD Cache Side-channel Attack</em>, 2014, online-access: <a href="https://eprint.iacr.org/2014/140.pdf">https://eprint.iacr.org/2014/140.pdf</a></p>
+<p><code>[11]</code> <em>RFC 8734 Elliptic Curve Cryptography (ECC) Brainpool Curves for Transport Layer Security (TLS) Version 1.3</em>, Appendix A. Test Vectors, online-access: <a href="https://www.rfc-editor.org/rfc/rfc8734.html#section-appendix.a-1">https://www.rfc-editor.org/rfc/rfc8734.html#section-appendix.a-1</a> / <a href="https://datatracker.ietf.org/doc/html/rfc6932#appendix-A.1">https://datatracker.ietf.org/doc/html/rfc6932#appendix-A.1</a></p>
+<p>Other resources:</p>
+<p><em>Elliptic Curve Cryptography, Technical Guideline BSI TR-03111</em>, Bundesamt fur Sicherheit in der Informationstechnik, 2018, online-access: <a href="https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/TechGuidelines/TR03111/BSI-TR-03111_V-2-1_pdf.pdf?__blob=publicationFile&amp;v=1">https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/TechGuidelines/TR03111/BSI-TR-03111_V-2-1_pdf.pdf?__blob=publicationFile&amp;v=1</a></p>
+<p>Buchanan B., <em>Barebones P256: There Is Beauty in Elliptic Curves</em>, 2020, online-access: <a href="https://billatnapier.medium.com/barebones-p256-1700ff5a4">https://billatnapier.medium.com/barebones-p256-1700ff5a4</a></p>
+<p>Dharmapurikar M., Jandhyala A., Jones S., Renaud C., <em>Elliptic Curve Cryptography</em>, 2018, online-access: <a href="https://girlstalkmath.com/2018/07/02/elliptic-curve-cryptography-2/">https://girlstalkmath.com/2018/07/02/elliptic-curve-cryptography-2/</a></p>
 
 </div>
 </div>
