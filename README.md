@@ -26,7 +26,7 @@ Elliptic Curve Cryptography (ECC) leverages algebraic structure of elliptic curv
 
 ## Tools used
 
-The tasks were realized in Python with use of Jupyter Notebook, in order to be able to embed the code easily in the report and to have nicely formatted mathematical formulas. The results are exported to html and pdf formats, but for best readibility (long tables not fitting on pdf f.ex.), please check the [`ECC-lab.ipnyb`](./ECC-lab.ipnyb) directly, as GitHub provides native rendering of Jupyter notebooks files.
+The tasks were realized in Python with use of Jupyter Notebook, in order to be able to embed the code easily in the report and to have nicely formatted mathematical formulas. The results are exported to html and pdf formats, but for best readibility (long tables not fitting on pdf f.ex.), please check the notebook via NBViewer [here](https://nbviewer.org/github/mskarbe/cryptography-elliptic-curves/blob/main/ECC-lab.ipynb).
 
 ## Resources
 
